@@ -90,10 +90,14 @@ circles
     });
 ```
 
-Remember the first type of event in a datum's lifespan - its creation. The creation of new data is referred to 'entering' in D3. In the above statement we tell D3 that upon entering of new data do the following:
+Remember the first type of event in a datum's lifespan - its creation. The creation of new data is referred to 'entering' in D3. In the above statement we tell D3 that upon `enter`ing of new data do the following:
 
 1. Append a new `circle` element.
 2. Set some of its attributes.
+
+What the `enter` method does, in effect, is taking the selections (virtual or not) and filtering them such that only selections for new elements remain.
+
+Notice that setting the attributes is done by the return value of a callback function. This function receives an argument `d` (which stands for *datum*). This allows us to set attributes which depend upon properties of the specific datum which is bound to the element.
 
 The result (check out the [full code](https://github.com/EyalAr/D3.js-Example/blob/master/1.js)):
 
@@ -111,11 +115,11 @@ data.push({
 	x: 4,
 	y: 2,
 	r: 5,
-	c: 'black'
+	c: 'magenta'
 });
 ```
 
- We want to reflect those changes in data in our canvas. First, we need to tell D3 about these changes in data. We saw before how to bind our data with `circle` elements. Let's do that again:
+ We want to reflect those changes in data in our canvas. First, we need to tell D3 about these changes. We saw before how to bind our data with `circle` elements. Let's do that again:
 
 ```Javascript
 var circles = canvas
@@ -123,4 +127,28 @@ var circles = canvas
 	.data(data);
 ```
 
-Unlike the previous time, this time not all of the datums in `data` are new. `data[1]` and `data[2]` represent the same circles as before. `data[0]` is also not new, just changed. `data[3]` is new.
+Unlike the previous time, this time not all of the datums in `data` are new. `data[1]` and `data[2]` represent the same circles as before. `data[0]` is also not new, just changed. `data[3]` is new. This time `selectAll` creates only one virtual selection for the last circle, but three actual selections for the already existing circles. Since only the last circle is new, if we run again `circles.enter()`, only one selection, for the new circle, will remain. So running again the following code will create only one new circle, which is exactly what we want:
+
+```Javascript
+circles
+    .enter()
+    .append('circle')
+    // set attributes as before...
+```
+
+In order to update the existing circles we simply need to omit the `enter` filter:
+
+```Javascript
+// update (x,y) coordinates:
+circles
+    .attr('cx', function(d) {
+        return d.x;
+    })
+    .attr('cy', function(d) {
+        return d.y;
+    });
+```
+
+The result ([full code](https://github.com/EyalAr/D3.js-Example/blob/master/2.js)):
+
+<iframe src="http://eyalar.github.io/D3.js-Example/index.html?2!1"></iframe>
