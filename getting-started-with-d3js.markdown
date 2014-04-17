@@ -93,8 +93,34 @@ circles
 Remember the first type of event in a datum's lifespan - its creation. The creation of new data is referred to 'entering' in D3. In the above statement we tell D3 that upon entering of new data do the following:
 
 1. Append a new `circle` element.
-2. Set some of its properties.
+2. Set some of its attributes.
 
 The result (check out the [full code](https://github.com/EyalAr/D3.js-Example/blob/master/1.js)):
 
 <iframe src="http://eyalar.github.io/D3.js-Example/index.html?1!0"></iframe>
+
+Let's say we already have data and the corresponding circles drawn on our canvas; but now some of the data changed:
+
+```Javascript
+// change coordinates of the first circle:
+data[0].x = 3;
+data[0].y = 3;
+
+// add a new circle:
+data.push({
+	x: 4,
+	y: 2,
+	r: 5,
+	c: 'black'
+});
+```
+
+ We want to reflect those changes in data in our canvas. First, we need to tell D3 about these changes in data. We saw before how to bind our data with `circle` elements. Let's do that again:
+
+```Javascript
+var circles = canvas
+	.selectAll('circle')
+	.data(data);
+```
+
+Unlike the previous time, this time not all of the datums in `data` are new. `data[1]` and `data[2]` represent the same circles as before. `data[0]` is also not new, just changed. `data[3]` is new.
