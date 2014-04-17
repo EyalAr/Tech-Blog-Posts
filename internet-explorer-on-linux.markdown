@@ -1,10 +1,3 @@
-Title: Testing websites on Internet Explorer under Linux
-Date: 2014-01-05  
-Category: Technical  
-Tags: internet explorer, linux, virtual machine, virtualization  
-Slug: internet-explorer-on-linux  
-Author: Eyal Arubas  
-
 As every web developer knows, debugging your website requires testing it on
 different browsers. Every browser (or at least every rendering and Javascript
 engines) is different in the way it parses and presents web pages. Different

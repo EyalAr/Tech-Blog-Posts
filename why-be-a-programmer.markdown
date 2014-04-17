@@ -1,10 +1,3 @@
-Title: Why be a programmer  
-Date: 2014-01-23  
-Category: Technical  
-Tags:   
-Slug: why-be-a-programmer  
-Author: Eyal Arubas  
-
 *Once I had to write a personal statement about what I do. Here it is...*
 
 Writing about the first computer my dad bought me when I was 10 is, although

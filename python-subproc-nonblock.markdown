@@ -1,10 +1,3 @@
-Title: Non blocking reading from a subprocess output stream in Python  
-Date: 2013-12-11  
-Category: Technical  
-Tags: python, code, subprocess, non blocking  
-Slug: python-subproc-nonblock  
-Author: Eyal Arubas  
-
 In one of my projects I had to run an interactive shell application as a
 subprocess. I would send commands through the process' `stdin` pipe and read
 the results through its `stdout` pipe. As this subprocess is an interactive

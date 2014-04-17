@@ -1,10 +1,3 @@
-Title: OpenCV Installation on Windows + Netbeans + MinGW
-Date: 2012-10-23  
-Category: Technical  
-Tags: opencv, c++, netbeans, windows, mingw  
-Slug: opencv-installation-on-windows-netbeans-mingw  
-Author: Eyal Arubas  
-
 When I first started using OpenCV, I encountered two major difficulties:
 
 1. Getting my programs NOT to crash immediately.

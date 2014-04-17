@@ -1,10 +1,3 @@
-Title: Face Detection and Recognition (Theory and Practice)  
-Date: 2013-04-06
-Category: Technical
-Tags: opencv, face detection, face recognition
-Slug: face-detection-and-recognition
-Author: Eyal Arubas
-
 OpenCV offers a good face detection and recognition [module][1] (by [Philipp
 Wagner][2]). It contains algorithms which can be used to perform some cool
 stuff. In this guide I will roughly explain how face detection and recognition

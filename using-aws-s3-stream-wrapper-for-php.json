@@ -1,0 +1,15 @@
+{
+    "title": "Using AWS S3 Stream Wrapper for PHP",
+    "date": {
+        "day": 16,
+        "month": 10,
+        "year": 2012
+    },
+    "categories": ["technical"],
+    "tags": ["aws", "php", "s3", "stream wrapper"],
+    "slug": "using-aws-s3-stream-wrapper-for-php",
+    "authors": [{
+        "name": "Eyal Arubas",
+        "email": "eyalarubas@gmail.com"
+    }]
+}

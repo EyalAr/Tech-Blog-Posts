@@ -1,10 +1,3 @@
-Title: Using AWS S3 Stream Wrapper for PHP
-Date: 2012-10-16  
-Category: Technical  
-Tags: aws, php, s3, stream wrapper  
-Slug: using-aws-s3-stream-wrapper-for-php  
-Author: Eyal Arubas  
-
 Amazon’s [AWS PHP SDK][1] offers a [stream wrapper][2] for S3.
 
 By registering the `s3://` protocol, it’s possible to use PHP’s file handling

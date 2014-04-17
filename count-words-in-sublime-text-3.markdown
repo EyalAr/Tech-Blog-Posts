@@ -1,10 +1,3 @@
-Title: Count words plug-in for Sublime Text 3  
-Date: 2014-01-12  
-Category: Technical  
-Tags: sublime text 3, python, plug-in  
-Slug: count-words-in-sublime-text-3  
-Author: Eyal Arubas  
-
 I am using plain text editors, such as Sublime Text and Vim, not only for
 writing code, but also for other types of documents, such as blog posts. In Vim
 it's easy to get the word count, but in ST I did not find such a built-in

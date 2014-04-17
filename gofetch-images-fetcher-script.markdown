@@ -1,10 +1,3 @@
-Title: GoFetch Images Fetcher Script
-Date: 2012-10-16  
-Category: Technical  
-Tags: python, search, images, google, bing  
-Slug: gofetch-images-fetcher-script  
-Author: Eyal Arubas  
-
 'GoFetch' is an images fetcher script which I’ve written in Python.
 
 It retrieves a list of images urls according to specified search parameters.

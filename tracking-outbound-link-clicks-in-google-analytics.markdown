@@ -1,10 +1,3 @@
-Title: Tracking outbound link clicks in Google Analytics  
-Date: 2013-12-28  
-Category: Technical  
-Tags: google analytics, tracking, events, callback, javascript  
-Slug: tracking-outbound-link-clicks-in-google-analytics  
-Author: Eyal Arubas  
-
 In this post I will show the method I use to track outbound 'click' events
 (clicks which take the user away from the current page) with Google Analytics.
 I will be using the new [Analytics.js][1] and [jQuery][2] in the code samples.

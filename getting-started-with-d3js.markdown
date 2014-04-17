@@ -1,11 +1,3 @@
-Title: Getting started with D3.js  
-Date: 2014-04-15  
-Category: Technical  
-Tags:   
-Slug: getting-started-with-d3js  
-Author: Eyal Arubas  
-Status: draft  
-
 [D3.js][http://d3js.org/] stands for Data Driven Documents. It's a very comprehensive library which provides many tools for data-based calculations and document manipulations. It also handles (and that's one of its strong points) many of the math needed for the visualization of data. D3 has a steep learning curve, but once you experiment with it and manage to do simple visualization of some kind of data; the learning process will become much more compelling and interesting. That's the purpose of this post.
 
 D3 handles any kind of document, be it HTML or SVG, and it's not exclusively used to create graphics. That being said, D3 lends itself very well for manipulation of shapes and graphical objects based on static and dynamic data. As such, D3 makes it possible to create very appealing documents.

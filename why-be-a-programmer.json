@@ -1,0 +1,14 @@
+{
+    "title": "Why be a programmer",
+    "date": {
+        "day": 23,
+        "month": 1,
+        "year": 2014
+    },
+    "categories": ["technical"],
+    "slug": "why-be-a-programmer",
+    "authors": [{
+        "name": "Eyal Arubas",
+        "email": "eyalarubas@gmail.com"
+    }]
+}

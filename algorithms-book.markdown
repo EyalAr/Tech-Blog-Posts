@@ -1,10 +1,3 @@
-Title: Algorithms Book  
-Date: 2013-02-12  
-Category: Technical  
-Tags: algorithms, academia  
-Slug: algorithms-book  
-Author: Eyal Arubas  
-
 This notebook is based on an algorithms course I took in 2012 at the Hebrew
 University of Jerusalem, Israel. The material is based on my notes from the
 lectures of [Prof. Alex Samorodnitsky][1], as well as some entries in Wikipedia
