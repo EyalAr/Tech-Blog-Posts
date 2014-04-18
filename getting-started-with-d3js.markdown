@@ -152,3 +152,59 @@ circles
 The result ([full code](https://github.com/EyalAr/D3.js-Example/blob/master/2.js)):
 
 <iframe src="http://eyalar.github.io/D3.js-Example/index.html?2!1"></iframe>
+
+Similarly to the `enter` filter, we also have an `exit` filter; which filters the selection only to select elements which are bound to datums that no longer exist. This allows us to handle these 'orphan' elements. We can, for example, remove them from our canvas (and from the document altogether):
+
+```Javascript
+circles
+    .exit()
+    .remove();
+```
+
+In the above examples we used the `attr` method to set attributes of selected elements. For better visualization and user experience, we sometime want to gradually change attributes in a smooth animated way. We can create this experience by gradually setting the attributes from some initial value to a final value. Doing it manually would be tedious; which is why D3 provides us with the `transition` method. Any attribute that is set after we invoke `transition()` on the selection, will be set gradually instead of all at once.
+
+We can use `transition` on our selections as before, and set different transitions for different selections. We might want different effects when new elements are created, than the effects when coordinates are changed.
+
+Rewriting the above examples with transitions:
+
+```Javascript
+var circles = canvas
+    .selectAll('circle')
+    .data(data);
+
+// update (x,y) coordinates of existing elements:
+circles
+    .transition()
+    .attr('cx', function(d) {
+        return d.x;
+    })
+    .attr('cy', function(d) {
+        return d.y;
+    });
+
+// create new elements:
+circles
+    .enter()
+    .append('circle')
+    // set initial (pre-transition) attributes:
+    .attr('cx', function(d) {
+        return d.x;
+    })
+    .attr('cy', function(d) {
+        return d.y;
+    })
+    .attr('fill', function(d){
+        return d.c;
+    })
+    .attr('r', 0)
+    // start transition:
+    .transition()
+    // set final (post transition) attributes:
+    .attr('r', function(d) {
+        return d.r;
+    });
+```
+
+It's important to notice ... update / enter order.
+
+Notice that up until now we gave D3 data, but didn't provide it with any method to uniquely identifying datums.
