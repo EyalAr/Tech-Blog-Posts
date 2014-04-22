@@ -4,7 +4,7 @@ D3 handles any kind of document, be it HTML or SVG, and it's not exclusively use
 
 SVG is one type of document which is often being used with D3. With SVG one can create graphical entities much like creating and styling HTML elements. In this article we will use SVG to visualize our data.
 
-Data, naturally, has structure. And indeed the way with which D3 handles our dana is highly dependent on its structure. Before approaching the task of visualizing our data, we first have to decide on its structure. In D3 our data is no more than a collection of elements with some arbitrary properties which we decide upon. In order to make our code concise and elegant our data needs to be formatted in an efficient way.
+Data, naturally, has structure. And indeed the way with which D3 handles our data is highly dependent on its structure. Before approaching the task of visualizing our data, we first have to decide on its structure. In D3 our data is no more than a collection of elements with some arbitrary properties which we decide upon. In order to make our code concise and elegant our data needs to be formatted in an efficient way.
 
 For example, think of a collection of circles we want to draw on the screen. Let's say each circle is defined by it's center point coordinates. Each circle also has a radius and a color. How would we represent these circles as datums?
 
@@ -90,14 +90,14 @@ circles
     });
 ```
 
-Remember the first type of event in a datum's lifespan - its creation. The creation of new data is referred to 'entering' in D3. In the above statement we tell D3 that upon `enter`ing of new data do the following:
+Remember the first type of event in a datum's lifespan - its creation. The creation of new data is referred to as 'entering' in D3. In the above statement we tell D3 that upon entering of new data do the following:
 
 1. Append a new `circle` element.
 2. Set some of its attributes.
 
 What the `enter` method does, in effect, is taking the selections (virtual or not) and filtering them such that only selections for new elements remain.
 
-Notice that setting the attributes is done by the return value of a callback function. This function receives an argument `d` (which stands for *datum*). This allows us to set attributes which depend upon properties of the specific datum which is bound to the element.
+Notice that setting the attributes is done by the return value of a callback function. This function receives an argument `d` (stands for *datum*) which is initialized with the value of the current datum. This allows us to set attributes which depend upon properties of the specific datum which is bound to the element.
 
 The result (check out the [full code](https://github.com/EyalAr/D3.js-Example/blob/master/1.js)):
 
@@ -205,6 +205,53 @@ circles
     });
 ```
 
-It's important to notice ... update / enter order.
+When applying transitions to selections we set one or more attributes of the element to gradually change. All of these attributes will change in this one transition. It's important to note that defining multiple transitions at once has no effect, as the last defined transition takes precedence and overrides the others.
+
+So in the following example *transition 1* will not occur:
+
+```Javascript
+// transition 1:
+circles
+    .transition()
+    .attr('cx', function(d) {
+        return d.x;
+    })
+    .attr('cy', function(d) {
+        return d.y;
+    });
+
+// transition 2:
+circles
+    .transition()
+    .attr('r', function(d) {
+        return d.r;
+    });
+
+```
+
+The reason for this is Javascript's asynchronous nature, but we will not get into it in this post. In order to chain transitions on the same selection, we will have to make sure that *transition 2* is defined only after *transition 1* ends:
+
+```Javascript
+// transition 1:
+circles
+    .transition()
+    .attr('cx', function(d) {
+        return d.x;
+    })
+    .attr('cy', function(d) {
+        return d.y;
+    })
+    .each('end', function(d){
+        // transition 2:
+        d3.select(this)
+            .transition()
+            .attr('r', function(d) {
+                return d.r;
+            });
+    });
+
+```
+
+For this reason, when we defined the `update` and `enter` transitions in the above example; we defined the `enter` transition **after** the `update` transition. We want the `enter` transition of new elements to take precedence over the `update` transition.
 
 Notice that up until now we gave D3 data, but didn't provide it with any method to uniquely identifying datums.
