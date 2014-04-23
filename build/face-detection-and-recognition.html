@@ -9,7 +9,7 @@
 
 	<title>Face Detection and Recognition (Theory and Practice) - Eyal&#39;s Technical Blog</title>
 
-	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="highlight.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
 
@@ -58,11 +58,11 @@ of a face. Luckily human faces do not greatly differ from each other; we all
 have noses, eyes, foreheads, chins and mouths; and all of these compose the
 general structure of a face.</p>
 <p>Consider the following 5 figures:</p>
-<p><img src="../images/face-detection-and-recognition/features-eyebrows.jpg" alt="Feature 1"> <img src="../images/face-detection-and-recognition/features-nose.jpg" alt="Feature 2"> <img src="../images/face-detection-and-recognition/haar-eyes.jpg" alt="Feature 3"> <img src="../images/face-detection-and-recognition/features-mouth.jpg" alt="Feature 4">
-<img src="../images/face-detection-and-recognition/features-chin.jpg" alt="Feature 5"></p>
+<p><img src="images/face-detection-and-recognition/features-eyebrows.jpg" alt="Feature 1"> <img src="images/face-detection-and-recognition/features-nose.jpg" alt="Feature 2"> <img src="images/face-detection-and-recognition/haar-eyes.jpg" alt="Feature 3"> <img src="images/face-detection-and-recognition/features-mouth.jpg" alt="Feature 4">
+<img src="images/face-detection-and-recognition/features-chin.jpg" alt="Feature 5"></p>
 <p>Each of these figures represents a general feature of a human face. Combining
 all the features together we, indeed, receive something that resembles a face.</p>
-<p><img src="../images/face-detection-and-recognition/haar-all.jpg" alt="All Features"></p>
+<p><img src="images/face-detection-and-recognition/haar-all.jpg" alt="All Features"></p>
 <p>By determining if each of these features is similar to some part of our
 picture, we can conclude if the picture contains a face or not. Notice that
 this does not have to be an accurate match; we just need to know if, roughly,
@@ -73,7 +73,7 @@ train our algorithm to use the right features in the right positions; and thus
 detect faces.</p>
 <p>Let&#39;s see an example. See in the figures below how the above features can be
 used to detect a face (namely, the face of President Barack Obama).</p>
-<p><img src="../images/face-detection-and-recognition/obama-color.jpg" alt="Obama Color"> <img src="../images/face-detection-and-recognition/obama-binary.jpg" alt="Obama Binary"> <img src="../images/face-detection-and-recognition/haar-features-all-obama.jpg" alt="Obama Features"></p>
+<p><img src="images/face-detection-and-recognition/obama-color.jpg" alt="Obama Color"> <img src="images/face-detection-and-recognition/obama-binary.jpg" alt="Obama Binary"> <img src="images/face-detection-and-recognition/haar-features-all-obama.jpg" alt="Obama Features"></p>
 <p>In order for this process be quick, we design it in such a way that we first
 check the coarse features which represent the coarse structure of a face; and
 only if these features match, we continue to the next iteration and use finer
@@ -108,7 +108,7 @@ training set a bit differently.</p>
 <p>Eigenfaces and Fisherfaces find a mathematical description of the most dominant
 features of the training set as a whole. LBPH analyzes each face in the
 training set separately and independently.</p>
-<p>An example training set:<br><img src="../images/face-detection-and-recognition/training_set.jpg" alt="Example Training Set"></p>
+<p>An example training set:<br><img src="images/face-detection-and-recognition/training_set.jpg" alt="Example Training Set"></p>
 <h4 id="eigenfaces-fisherfaces">Eigenfaces &amp; Fisherfaces</h4>
 <p>Those familiar with linear algebra will remember that every vector space has
 an orthogonal basis. By combining elements of this basis we can compose every
@@ -122,12 +122,12 @@ We can now talk about the vector space in which these vectors reside. By
 treating the images as samples of data, we can perform a <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors#Principal_components_analysis">Principal Components
 Analysis</a> and obtain the eigenvectors which make up the basis of the vector
 space.</p>
-<p><img src="../images/face-detection-and-recognition/princomp.png" alt="Principal componenets of a dataset"><br>Principal components of a dataset (Source: <a href="https://en.wikipedia.org/wiki/File:GaussianScatterPCA.png">Wikipedia</a>).</p>
+<p><img src="images/face-detection-and-recognition/princomp.png" alt="Principal componenets of a dataset"><br>Principal components of a dataset (Source: <a href="https://en.wikipedia.org/wiki/File:GaussianScatterPCA.png">Wikipedia</a>).</p>
 <p>These eigenvectors represent the most prominent features of the dataset, and
 since we talk about face images, the eigenvectors actually represent the
 strongest characteristics of the faces in the dataset. See for example the
 first 8 eigenvectors of the dataset from above:</p>
-<p><img src="../images/face-detection-and-recognition/eigenfaces.jpg" alt="First 8 eigenfaces of the training set"><br>(To extract the eigenfaces of the training set I wrote a small Matlab script
+<p><img src="images/face-detection-and-recognition/eigenfaces.jpg" alt="First 8 eigenfaces of the training set"><br>(To extract the eigenfaces of the training set I wrote a small Matlab script
 which can be <a href="https://gist.github.com/EyalAr/5196200">obtained here</a>).</p>
 <p>Now, whenever we are provided with a new, unknown, face, we can decompose it to
 the basis we found, see which eigenvector(s) “explain” most of the face, and
@@ -142,7 +142,7 @@ result to each of the images in the dataset. The way which we analyze the
 images is by characterizing the local patterns in each location in the image.</p>
 <p>Following is such a <a href="http://en.wikipedia.org/wiki/Local_binary_patterns">local binary patterns</a> analysis on each of the images
 of the dataset from above:</p>
-<p><img src="../images/face-detection-and-recognition/lbp.jpg" alt="Local binary patterns of the 10 images in the training set"><br>(To extract the local binary patterns of the training set I used this <a href="http://www.mathworks.com/matlabcentral/fileexchange/36484-local-binary-patterns">Matlab
+<p><img src="images/face-detection-and-recognition/lbp.jpg" alt="Local binary patterns of the 10 images in the training set"><br>(To extract the local binary patterns of the training set I used this <a href="http://www.mathworks.com/matlabcentral/fileexchange/36484-local-binary-patterns">Matlab
 script</a>).</p>
 <h2 id="demo-application">Demo Application</h2>
 <p>For the purpose of this guide, and to make it interesting, we will build an
@@ -295,14 +295,14 @@ Obama</a>. We use the training set from above.</p>
 
 <p>By using the data of the CSV file, we obtain the confidence level in each frame
 of the video:</p>
-<p><img src="../images/face-detection-and-recognition/chart-confidence-600.png" alt="Confidence of recognition of each frame"></p>
+<p><img src="images/face-detection-and-recognition/chart-confidence-600.png" alt="Confidence of recognition of each frame"></p>
 <p>By setting some threshold value, we can obtain a binary determination (yes/no)
 of which frames contain the face (frontal) of President Obama:</p>
-<p><img src="../images/face-detection-and-recognition/chart-appearances-600.png" alt="Frontal face recognition in each frame"></p>
+<p><img src="images/face-detection-and-recognition/chart-appearances-600.png" alt="Frontal face recognition in each frame"></p>
 <p>For example, we can tell, just by looking at this analysis, that in frame 4100
 President Obama does not face forward, but in frame 4600 he does:</p>
-<p>Frame 4100:<br><img src="../images/face-detection-and-recognition/frame4100-600.jpg" alt="Frame 4100"></p>
-<p>Frame 4600:<br><img src="../images/face-detection-and-recognition/frame4600-600.jpg" alt="Frame 4600"></p>
+<p>Frame 4100:<br><img src="images/face-detection-and-recognition/frame4100-600.jpg" alt="Frame 4100"></p>
+<p>Frame 4600:<br><img src="images/face-detection-and-recognition/frame4600-600.jpg" alt="Frame 4600"></p>
 <h2 id="summary">Summary</h2>
 <p>We have seen examples of both detection and recognition of faces. The theory
 behind the two subjects is quite interesting. The OpenCV library implements for

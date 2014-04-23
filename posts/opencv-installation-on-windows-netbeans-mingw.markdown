@@ -167,14 +167,14 @@ int main(int argc, char** argv) {
 [1]:http://www.cmake.org/
 [2]:http://opencv.willowgarage.com/wiki/
 
-[img1]:../images/opencv-installation-on-windows-netbeans-mingw/cmake-1.png
-[img2]:../images/opencv-installation-on-windows-netbeans-mingw/cmake-2.png
-[img3]:../images/opencv-installation-on-windows-netbeans-mingw/cmake-31.png
-[img4]:../images/opencv-installation-on-windows-netbeans-mingw/cmake-4.png
-[img5]:../images/opencv-installation-on-windows-netbeans-mingw/cmake-5.png
-[img6]:../images/opencv-installation-on-windows-netbeans-mingw/cmake-5b.png
-[img7]:../images/opencv-installation-on-windows-netbeans-mingw/netbeans-mingw1.png
-[img8]:../images/opencv-installation-on-windows-netbeans-mingw/netbeans-include.png
-[img9]:../images/opencv-installation-on-windows-netbeans-mingw/netbeans-libraries1.png
-[img10]:../images/opencv-installation-on-windows-netbeans-mingw/netbeans-use-libraries.png
-[img11]:../images/opencv-installation-on-windows-netbeans-mingw/opencv-hello-world.png
+[img1]:images/opencv-installation-on-windows-netbeans-mingw/cmake-1.png
+[img2]:images/opencv-installation-on-windows-netbeans-mingw/cmake-2.png
+[img3]:images/opencv-installation-on-windows-netbeans-mingw/cmake-31.png
+[img4]:images/opencv-installation-on-windows-netbeans-mingw/cmake-4.png
+[img5]:images/opencv-installation-on-windows-netbeans-mingw/cmake-5.png
+[img6]:images/opencv-installation-on-windows-netbeans-mingw/cmake-5b.png
+[img7]:images/opencv-installation-on-windows-netbeans-mingw/netbeans-mingw1.png
+[img8]:images/opencv-installation-on-windows-netbeans-mingw/netbeans-include.png
+[img9]:images/opencv-installation-on-windows-netbeans-mingw/netbeans-libraries1.png
+[img10]:images/opencv-installation-on-windows-netbeans-mingw/netbeans-use-libraries.png
+[img11]:images/opencv-installation-on-windows-netbeans-mingw/opencv-hello-world.png

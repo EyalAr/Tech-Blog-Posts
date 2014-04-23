@@ -9,7 +9,7 @@
 
 	<title>OpenCV Installation on Windows + Netbeans + MinGW - Eyal&#39;s Technical Blog</title>
 
-	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="highlight.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
 
@@ -84,14 +84,14 @@ CMake to the system PATH).</li>
 <code>c:/opencv/</code>.</li>
 <li>Launch CMake GUI.<ol>
 <li>Browse for the source directory <code>c:/opencv/</code>.</li>
-<li>Choose where to build the binaries. I chose <code>c:/opencv/release</code>.<br><img src="../images/opencv-installation-on-windows-netbeans-mingw/cmake-1.png" alt="CMake Configuration - 1"></li>
+<li>Choose where to build the binaries. I chose <code>c:/opencv/release</code>.<br><img src="images/opencv-installation-on-windows-netbeans-mingw/cmake-1.png" alt="CMake Configuration - 1"></li>
 <li>Click &#39;Configure&#39;. In the screen that opens choose the generator
-according to your compiler. In our case it&#39;s &#39;MinGW Makefiles&#39;.<br><img src="../images/opencv-installation-on-windows-netbeans-mingw/cmake-2.png" alt="CMake Configuration - 2"></li>
-<li>Wait for everything to load, afterwards you will see this screen:<br><img src="../images/opencv-installation-on-windows-netbeans-mingw/cmake-31.png" alt="CMake Configuration - 3"></li>
+according to your compiler. In our case it&#39;s &#39;MinGW Makefiles&#39;.<br><img src="images/opencv-installation-on-windows-netbeans-mingw/cmake-2.png" alt="CMake Configuration - 2"></li>
+<li>Wait for everything to load, afterwards you will see this screen:<br><img src="images/opencv-installation-on-windows-netbeans-mingw/cmake-31.png" alt="CMake Configuration - 3"></li>
 <li>Change the settings if you want, or leave the defaults. When you&#39;re
 done, press &#39;Configure&#39; again. You should see &#39;Configuration done&#39; at
 the log window, and the red background should disappear from all the
-cells.<br><img src="../images/opencv-installation-on-windows-netbeans-mingw/cmake-4.png" alt="CMake Configuration - 4"></li>
+cells.<br><img src="images/opencv-installation-on-windows-netbeans-mingw/cmake-4.png" alt="CMake Configuration - 4"></li>
 <li>At this point CMake is ready to generate the makefile with which we will
 compile OpenCV with our compiler. Click &#39;Generate&#39; and wait for the
 makefile to be generated. When the process is finished you should see
@@ -102,7 +102,7 @@ makefile to be generated. When the process is finished you should see
 prompt).<ol>
 <li>Enter the directory <code>c:/opencv/release/</code>.</li>
 <li>Type <code>mingw32-make</code> and press enter. This should start the compilation
-process.<br><img src="../images/opencv-installation-on-windows-netbeans-mingw/cmake-5.png" alt="MinGW Make"><br><img src="../images/opencv-installation-on-windows-netbeans-mingw/cmake-5b.png" alt="MinGW Make - Compilation"></li>
+process.<br><img src="images/opencv-installation-on-windows-netbeans-mingw/cmake-5.png" alt="MinGW Make"><br><img src="images/opencv-installation-on-windows-netbeans-mingw/cmake-5b.png" alt="MinGW Make - Compilation"></li>
 <li>When the compilation is done OpenCV&#39;s binaries are ready to be used.</li>
 <li>For convenience, <strong>we should add the directory <code>C:/opencv/release/bin</code>
 to the system PATH</strong>. This will make sure our programs can find the
@@ -122,20 +122,20 @@ which is why we added the directory which contains them to the system PATH
 MinGW. Please see the screenshot below and verify your settings are correct
 (considering paths changes according to your own installation). <strong>Also note</strong>
 that the <code>make</code> command should be from msys and <strong>not</strong> from Cygwin.</p>
-<p><img src="../images/opencv-installation-on-windows-netbeans-mingw/netbeans-mingw1.png" alt="Netbeans MinGW Configuration"></p>
+<p><img src="images/opencv-installation-on-windows-netbeans-mingw/netbeans-mingw1.png" alt="Netbeans MinGW Configuration"></p>
 <p>Next, for each new project you create in Netbeans, you should define the
 include path (the directory which contains the header files), the libraries
 path and the specific libraries you intend to use.  Right-click the project
 name in the &#39;projects&#39; pane, and choose &#39;properties&#39;.  Add the include path
 (modify the path according to your own installation):</p>
-<p><img src="../images/opencv-installation-on-windows-netbeans-mingw/netbeans-include.png" alt="Netbeans Project Include Path"></p>
+<p><img src="images/opencv-installation-on-windows-netbeans-mingw/netbeans-include.png" alt="Netbeans Project Include Path"></p>
 <p>Add the libraries path:</p>
-<p><img src="../images/opencv-installation-on-windows-netbeans-mingw/netbeans-libraries1.png" alt="Netbeans Libraries Path"></p>
+<p><img src="images/opencv-installation-on-windows-netbeans-mingw/netbeans-libraries1.png" alt="Netbeans Libraries Path"></p>
 <p>Add the specific libraries you intend to use. These libraries will be
 dynamically linked to your program in the linking stage. Usually you will need
 the <code>core</code> library plus any other libraries according to the specific needs of
 your program.</p>
-<p><img src="../images/opencv-installation-on-windows-netbeans-mingw/netbeans-use-libraries.png" alt="Netbeans Include Libraries"></p>
+<p><img src="images/opencv-installation-on-windows-netbeans-mingw/netbeans-use-libraries.png" alt="Netbeans Include Libraries"></p>
 <p>That&#39;s it, you are now ready to use OpenCV!</p>
 <h2 id="summary">Summary</h2>
 <p>Here are the general steps you need to complete in order to install OpenCV and
@@ -155,7 +155,7 @@ example: libopencv_core240.dll.a).</li>
 <p>Here is a small example program which draws the text &quot;Hello World : )&quot; on a GUI
 window. You can use it to check that your installation works correctly. After
 compiling and running the program, you should see the following window:</p>
-<p><img src="../images/opencv-installation-on-windows-netbeans-mingw/opencv-hello-world.png" alt="OpenCV Hello World"></p>
+<p><img src="images/opencv-installation-on-windows-netbeans-mingw/opencv-hello-world.png" alt="OpenCV Hello World"></p>
 <pre><code class="lang-c++"><span class="hljs-preprocessor">#include "opencv2/opencv.hpp"</span>
 <span class="hljs-preprocessor">#include "opencv2/highgui/highgui.hpp"</span>
 

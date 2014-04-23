@@ -357,20 +357,20 @@ more angles and positions.
 
 [post1]:opencv-installation-on-windows-netbeans-mingw.markdown
 
-[img1]:../images/face-detection-and-recognition/features-eyebrows.jpg
-[img2]:../images/face-detection-and-recognition/features-nose.jpg
-[img3]:../images/face-detection-and-recognition/haar-eyes.jpg
-[img4]:../images/face-detection-and-recognition/features-mouth.jpg
-[img5]:../images/face-detection-and-recognition/features-chin.jpg
-[img6]:../images/face-detection-and-recognition/haar-all.jpg
-[img7]:../images/face-detection-and-recognition/obama-color.jpg
-[img8]:../images/face-detection-and-recognition/obama-binary.jpg
-[img9]:../images/face-detection-and-recognition/haar-features-all-obama.jpg
-[img10]:../images/face-detection-and-recognition/training_set.jpg
-[img11]:../images/face-detection-and-recognition/princomp.png
-[img12]:../images/face-detection-and-recognition/eigenfaces.jpg
-[img13]:../images/face-detection-and-recognition/lbp.jpg
-[img14]:../images/face-detection-and-recognition/chart-confidence-600.png
-[img15]:../images/face-detection-and-recognition/chart-appearances-600.png
-[img16]:../images/face-detection-and-recognition/frame4100-600.jpg
-[img17]:../images/face-detection-and-recognition/frame4600-600.jpg
+[img1]:images/face-detection-and-recognition/features-eyebrows.jpg
+[img2]:images/face-detection-and-recognition/features-nose.jpg
+[img3]:images/face-detection-and-recognition/haar-eyes.jpg
+[img4]:images/face-detection-and-recognition/features-mouth.jpg
+[img5]:images/face-detection-and-recognition/features-chin.jpg
+[img6]:images/face-detection-and-recognition/haar-all.jpg
+[img7]:images/face-detection-and-recognition/obama-color.jpg
+[img8]:images/face-detection-and-recognition/obama-binary.jpg
+[img9]:images/face-detection-and-recognition/haar-features-all-obama.jpg
+[img10]:images/face-detection-and-recognition/training_set.jpg
+[img11]:images/face-detection-and-recognition/princomp.png
+[img12]:images/face-detection-and-recognition/eigenfaces.jpg
+[img13]:images/face-detection-and-recognition/lbp.jpg
+[img14]:images/face-detection-and-recognition/chart-confidence-600.png
+[img15]:images/face-detection-and-recognition/chart-appearances-600.png
+[img16]:images/face-detection-and-recognition/frame4100-600.jpg
+[img17]:images/face-detection-and-recognition/frame4600-600.jpg
