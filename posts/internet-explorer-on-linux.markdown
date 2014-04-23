@@ -52,5 +52,5 @@ from Windows' command prompt to find what it is.
 [1]:https://www.virtualbox.org/
 [2]:http://www.modern.ie/en-us/virtualization-tools
 
-[img1]:images/internet-explorer-on-linux/ie8vm.png
-[img2]:images/internet-explorer-on-linux/cmd.png
+[img1]:../images/internet-explorer-on-linux/ie8vm.png
+[img2]:../images/internet-explorer-on-linux/cmd.png

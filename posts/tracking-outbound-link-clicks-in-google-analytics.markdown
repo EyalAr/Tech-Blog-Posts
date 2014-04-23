@@ -12,17 +12,18 @@ GA provides us with the [send][3] method.
 A naive way to do it would be to bind the Javascript `onclick` event with a
 function (an [event listener][4]) that sends the event's data to GA:
 
-    #!javascript
-    // register an event listener to the 'click' event:
-    $("...").on('click', function(e){
-        ga('send', {
-            'hitType': 'event',
-            'eventCategory': '...',
-            'eventAction': '...',
-            'eventLabel': '...',
-            }
-        });
+```javascript
+// register an event listener to the 'click' event:
+$("...").on('click', function(e){
+    ga('send', {
+        'hitType': 'event',
+        'eventCategory': '...',
+        'eventAction': '...',
+        'eventLabel': '...',
+        }
     });
+});
+```
 
 This method will not always work, as we cannot guarantee that the `send` data
 will be received by GA before the browser unloads our page and loads the new
@@ -50,23 +51,24 @@ Many of the solutions I have seen online suggest to use Javascript's
 providing enough time for GA to receive the data. It is usually implemented in
 the following manner:
 
-    #!javascript
-    $("...").on('click', function(e){
-        // prevent browser from loading the new page:
-        e.preventDefault();
+```javascript
+$("...").on('click', function(e){
+    // prevent browser from loading the new page:
+    e.preventDefault();
 
-        // send data to GA:
-        ga('send', {
-            'hitType': 'event',
-            'eventCategory': '...',
-            'eventAction': '...',
-            'eventLabel': '...',
-            }
-        });
-
-        // manually load the new page after a timeout:
-        setTimeout('window.location = new_page_url', 100);
+    // send data to GA:
+    ga('send', {
+        'hitType': 'event',
+        'eventCategory': '...',
+        'eventAction': '...',
+        'eventLabel': '...',
+        }
     });
+
+    // manually load the new page after a timeout:
+    setTimeout('window.location = new_page_url', 100);
+});
+```
 
 In this example I use a delay of 100ms, which is what most solutions on the web
 use as well. This should usually provide enough time for the data to reach GA's
@@ -96,24 +98,25 @@ of time for the data to reach GA's server; before redirecting to the new page.
 
 Such a solution will employ the `hitCallback` property as follows:
 
-    #!javascript
-    $("...").on('click', function(e){
-        // prevent browser from loading the new page:
-        e.preventDefault();
+```javascript
+$("...").on('click', function(e){
+    // prevent browser from loading the new page:
+    e.preventDefault();
 
-        // send data to GA:
-        ga('send', {
-                'hitType': 'event',
-                'eventCategory': '...',
-                'eventAction': '...',
-                'eventLabel': '...',
-                'hitCallback': function(){
-                    // redirect:
-                    window.location = 'new_page_url';
-                }
+    // send data to GA:
+    ga('send', {
+            'hitType': 'event',
+            'eventCategory': '...',
+            'eventAction': '...',
+            'eventLabel': '...',
+            'hitCallback': function(){
+                // redirect:
+                window.location = 'new_page_url';
             }
-        });
+        }
     });
+});
+```
 
 Usually GA's servers are fast enough for the callback to fire almost immediately
 and the delay to be unnoticeable. But on some cases (slow connections,
@@ -122,28 +125,29 @@ callback never fire and the redirection to never occur. For these cases we can
 use `setTimeout` as a safety net. If the callback is not fired within a
 reasonable amount of time, we redirect anyway:
 
-    #!javascript
-    $("...").on('click', function(e){
-        // prevent browser from loading the new page:
-        e.preventDefault();
+```javascript
+$("...").on('click', function(e){
+    // prevent browser from loading the new page:
+    e.preventDefault();
 
-        // register safety net timeout:
-        var t = setTimeout('window.location = new_page_url', 250);
+    // register safety net timeout:
+    var t = setTimeout('window.location = new_page_url', 250);
 
-        // send data to GA:
-        ga('send', {
-                'hitType': 'event',
-                'eventCategory': '...',
-                'eventAction': '...',
-                'eventLabel': '...',
-                'hitCallback': function(){
-                    clearTimeout(t);
-                    // redirect:
-                    window.location = 'new_page_url';
-                }
+    // send data to GA:
+    ga('send', {
+            'hitType': 'event',
+            'eventCategory': '...',
+            'eventAction': '...',
+            'eventLabel': '...',
+            'hitCallback': function(){
+                clearTimeout(t);
+                // redirect:
+                window.location = 'new_page_url';
             }
-        });
+        }
     });
+});
+```
 
 If the timeout is never cleared by the callback, it means it hasn't been fired,
 so after 250ms we redirect anyway; not sending the data to GA, but at least

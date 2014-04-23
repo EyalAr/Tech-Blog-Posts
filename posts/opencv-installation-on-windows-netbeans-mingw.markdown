@@ -132,48 +132,49 @@ compiling and running the program, you should see the following window:
 
 ![OpenCV Hello World][img11]
 
-    #!c++
-    #include "opencv2/opencv.hpp"
-    #include "opencv2/highgui/highgui.hpp"
+```c++
+#include "opencv2/opencv.hpp"
+#include "opencv2/highgui/highgui.hpp"
 
-    using namespace cv;
+using namespace cv;
 
-    int main(int argc, char** argv) {
-        //create a gui window:
-        namedWindow("Output",1);
+int main(int argc, char** argv) {
+    //create a gui window:
+    namedWindow("Output",1);
 
-        //initialize a 120X350 matrix of black pixels:
-        Mat output = Mat::zeros( 120, 350, CV_8UC3 );
+    //initialize a 120X350 matrix of black pixels:
+    Mat output = Mat::zeros( 120, 350, CV_8UC3 );
 
-        //write text on the matrix:
-        putText(output,
-                "Hello World :)",
-                cvPoint(15,70),
-                FONT_HERSHEY_PLAIN,
-                3,
-                cvScalar(0,255,0),
-                4);
+    //write text on the matrix:
+    putText(output,
+            "Hello World :)",
+            cvPoint(15,70),
+            FONT_HERSHEY_PLAIN,
+            3,
+            cvScalar(0,255,0),
+            4);
 
-        //display the image:
-        imshow("Output", output);
+    //display the image:
+    imshow("Output", output);
 
-        //wait for the user to press any key:
-        waitKey(0);
+    //wait for the user to press any key:
+    waitKey(0);
 
-        return 0;
-    }
+    return 0;
+}
+```
 
 [1]:http://www.cmake.org/
 [2]:http://opencv.willowgarage.com/wiki/
 
-[img1]:images/opencv-installation-on-windows-netbeans-mingw/cmake-1.png
-[img2]:images/opencv-installation-on-windows-netbeans-mingw/cmake-2.png
-[img3]:images/opencv-installation-on-windows-netbeans-mingw/cmake-31.png
-[img4]:images/opencv-installation-on-windows-netbeans-mingw/cmake-4.png
-[img5]:images/opencv-installation-on-windows-netbeans-mingw/cmake-5.png
-[img6]:images/opencv-installation-on-windows-netbeans-mingw/cmake-5b.png
-[img7]:images/opencv-installation-on-windows-netbeans-mingw/netbeans-mingw1.png
-[img8]:images/opencv-installation-on-windows-netbeans-mingw/netbeans-include.png
-[img9]:images/opencv-installation-on-windows-netbeans-mingw/netbeans-libraries1.png
-[img10]:images/opencv-installation-on-windows-netbeans-mingw/netbeans-use-libraries.png
-[img11]:images/opencv-installation-on-windows-netbeans-mingw/opencv-hello-world.png
+[img1]:../images/opencv-installation-on-windows-netbeans-mingw/cmake-1.png
+[img2]:../images/opencv-installation-on-windows-netbeans-mingw/cmake-2.png
+[img3]:../images/opencv-installation-on-windows-netbeans-mingw/cmake-31.png
+[img4]:../images/opencv-installation-on-windows-netbeans-mingw/cmake-4.png
+[img5]:../images/opencv-installation-on-windows-netbeans-mingw/cmake-5.png
+[img6]:../images/opencv-installation-on-windows-netbeans-mingw/cmake-5b.png
+[img7]:../images/opencv-installation-on-windows-netbeans-mingw/netbeans-mingw1.png
+[img8]:../images/opencv-installation-on-windows-netbeans-mingw/netbeans-include.png
+[img9]:../images/opencv-installation-on-windows-netbeans-mingw/netbeans-libraries1.png
+[img10]:../images/opencv-installation-on-windows-netbeans-mingw/netbeans-use-libraries.png
+[img11]:../images/opencv-installation-on-windows-netbeans-mingw/opencv-hello-world.png

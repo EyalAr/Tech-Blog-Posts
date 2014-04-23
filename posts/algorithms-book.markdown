@@ -28,4 +28,4 @@ course.
 You can download a PDF or the latex code from [this repository][2].
 
 [1]:http://www.cs.huji.ac.il/~salex/
-[2]:https://bitbucket.org/EyalAr/algorithmsbook
+[2]:https://github.com/EyalAr/Algorithms-Book

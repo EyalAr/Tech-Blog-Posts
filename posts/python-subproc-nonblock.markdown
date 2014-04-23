@@ -19,33 +19,35 @@ To demonstrate, we could simulate the problem using the following code:
 
 `shell.py`:
 
-    #!python
-    import sys
-    while True:
-        s = raw_input("Enter command: ")
-        print "You entered: {}".format(s)
-        sys.stdout.flush()
+```python
+import sys
+while True:
+    s = raw_input("Enter command: ")
+    print "You entered: {}".format(s)
+    sys.stdout.flush()
+```
 
 `client.py`:
 
-    #!python
-    from subprocess import Popen, PIPE
-    from time import sleep
+```python
+from subprocess import Popen, PIPE
+from time import sleep
 
-    # run the shell as a subprocess:
-    p = Popen(['python', 'shell.py'],
-            stdin = PIPE, stdout = PIPE, stderr = PIPE, shell = False)
-    # issue command:
-    p.stdin.write('command\n')
-    # let the shell output the result:
-    sleep(0.1)
-    # get the output
-    while True:
-        output = p.stdout.read() # <-- Hangs here!
-        if not output:
-            print '[No more data]'
-            break
-        print output
+# run the shell as a subprocess:
+p = Popen(['python', 'shell.py'],
+        stdin = PIPE, stdout = PIPE, stderr = PIPE, shell = False)
+# issue command:
+p.stdin.write('command\n')
+# let the shell output the result:
+sleep(0.1)
+# get the output
+while True:
+    output = p.stdout.read() # <-- Hangs here!
+    if not output:
+        print '[No more data]'
+        break
+    print output
+```
 
 `shell.py` is a dummy shell which receives input and echoes it to `stdout`.
 It does it in an infinite loop, always waiting for new input, and never ends.
@@ -85,30 +87,31 @@ Such a solution will look something like this:
 
 `client_O_NONBLOCK.py`:
 
-    #!python
-    from subprocess import Popen, PIPE
-    from time import sleep
-    from fcntl import fcntl, F_GETFL, F_SETFL
-    from os import O_NONBLOCK, read
+```python
+from subprocess import Popen, PIPE
+from time import sleep
+from fcntl import fcntl, F_GETFL, F_SETFL
+from os import O_NONBLOCK, read
 
-    # run the shell as a subprocess:
-    p = Popen(['python', 'shell.py'],
-            stdin = PIPE, stdout = PIPE, stderr = PIPE, shell = False)
-    # set the O_NONBLOCK flag of p.stdout file descriptor:
-    flags = fcntl(p.stdout, F_GETFL) # get current p.stdout flags
-    fcntl(p.stdout, F_SETFL, flags | O_NONBLOCK)
-    # issue command:
-    p.stdin.write('command\n')
-    # let the shell output the result:
-    sleep(0.1)
-    # get the output
-    while True:
-        try:
-            print read(p.stdout.fileno(), 1024),
-        except OSError:
-            # the os throws an exception if there is no data
-            print '[No more data]'
-            break
+# run the shell as a subprocess:
+p = Popen(['python', 'shell.py'],
+        stdin = PIPE, stdout = PIPE, stderr = PIPE, shell = False)
+# set the O_NONBLOCK flag of p.stdout file descriptor:
+flags = fcntl(p.stdout, F_GETFL) # get current p.stdout flags
+fcntl(p.stdout, F_SETFL, flags | O_NONBLOCK)
+# issue command:
+p.stdin.write('command\n')
+# let the shell output the result:
+sleep(0.1)
+# get the output
+while True:
+    try:
+        print read(p.stdout.fileno(), 1024),
+    except OSError:
+        # the os throws an exception if there is no data
+        print '[No more data]'
+        break
+```
 
 And it works!
 
@@ -129,72 +132,74 @@ also exposes a `readline` function, which pulls from the queue the data.
 
 `nbstreamreader.py`:
 
-    #!python
-    from threading import Thread
-    from Queue import Queue, Empty
+```python
+from threading import Thread
+from Queue import Queue, Empty
 
-    class NonBlockingStreamReader:
+class NonBlockingStreamReader:
 
-        def __init__(self, stream):
+    def __init__(self, stream):
+        '''
+        stream: the stream to read from.
+                Usually a process' stdout or stderr.
+        '''
+
+        self._s = stream
+        self._q = Queue()
+
+        def _populateQueue(stream, queue):
             '''
-            stream: the stream to read from.
-                    Usually a process' stdout or stderr.
+            Collect lines from 'stream' and put them in 'quque'.
             '''
 
-            self._s = stream
-            self._q = Queue()
+            while True:
+                line = stream.readline()
+                if line:
+                    queue.put(line)
+                else:
+                    raise UnexpectedEndOfStream
 
-            def _populateQueue(stream, queue):
-                '''
-                Collect lines from 'stream' and put them in 'quque'.
-                '''
+        self._t = Thread(target = _populateQueue,
+                args = (self._s, self._q))
+        self._t.daemon = True
+        self._t.start() #start collecting lines from the stream
 
-                while True:
-                    line = stream.readline()
-                    if line:
-                        queue.put(line)
-                    else:
-                        raise UnexpectedEndOfStream
+    def readline(self, timeout = None):
+        try:
+            return self._q.get(block = timeout is not None,
+                    timeout = timeout)
+        except Empty:
+            return None
 
-            self._t = Thread(target = _populateQueue,
-                    args = (self._s, self._q))
-            self._t.daemon = True
-            self._t.start() #start collecting lines from the stream
-
-        def readline(self, timeout = None):
-            try:
-                return self._q.get(block = timeout is not None,
-                        timeout = timeout)
-            except Empty:
-                return None
-
-    class UnexpectedEndOfStream(Exception): pass
+class UnexpectedEndOfStream(Exception): pass
+```
 
 Now our original attempt for the client remains almost the same, and much more
 intuitive than using the `fcntl` module.
 
 `client_thread.py`:
 
-    #!python
-    from subprocess import Popen, PIPE
-    from time import sleep
-    from nbstreamreader import NonBlockingStreamReader as NBSR
+```python
+from subprocess import Popen, PIPE
+from time import sleep
+from nbstreamreader import NonBlockingStreamReader as NBSR
 
-    # run the shell as a subprocess:
-    p = Popen(['python', 'shell.py'],
-            stdin = PIPE, stdout = PIPE, stderr = PIPE, shell = False)
-    # wrap p.stdout with a NonBlockingStreamReader object:
-    nbsr = NBSR(p.stdout)
-    # issue command:
-    p.stdin.write('command\n')
-    # get the output
-    while True:
-        output = nbsr.readline(0.1)
-        # 0.1 secs to let the shell output the result
-        if not output:
-            print '[No more data]'
-            break
-        print output
+# run the shell as a subprocess:
+p = Popen(['python', 'shell.py'],
+        stdin = PIPE, stdout = PIPE, stderr = PIPE, shell = False)
+# wrap p.stdout with a NonBlockingStreamReader object:
+nbsr = NBSR(p.stdout)
+# issue command:
+p.stdin.write('command\n')
+# get the output
+while True:
+    output = nbsr.readline(0.1)
+    # 0.1 secs to let the shell output the result
+    if not output:
+        print '[No more data]'
+        break
+    print output
+```
 
 **Note**: All code from this post can be obtained in [this gist][8].
 

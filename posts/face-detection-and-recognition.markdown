@@ -188,24 +188,25 @@ The full code of the application can be obtained in [this git repository][10]
 
 ### Faces Detector
 
-    #!c++
-    class FaceDetector {
-    public:
-        FaceDetector(
-                const string &cascadePath,
-                double scaleFactor,
-                int    minNeighbors,
-                double minSizeRatio,
-                double maxSizeRatio);
-        virtual ~FaceDetector();
-        void findFacesInImage(const Mat &img, vector<Rect> &res);
-    private:
-        CascadeClassifier _cascade;
-        double _scaleFactor;
-        int    _minNeighbors;
-        double _minSizeRatio;
-        double _maxSizeRatio;
-    };
+```c++
+class FaceDetector {
+public:
+    FaceDetector(
+            const string &cascadePath,
+            double scaleFactor,
+            int    minNeighbors,
+            double minSizeRatio,
+            double maxSizeRatio);
+    virtual ~FaceDetector();
+    void findFacesInImage(const Mat &img, vector<Rect> &res);
+private:
+    CascadeClassifier _cascade;
+    double _scaleFactor;
+    int    _minNeighbors;
+    double _minSizeRatio;
+    double _maxSizeRatio;
+};
+```
 
 As explained earlier in this guide, we use the Haar cascades method to do the
 detection. OpenCV provides the `CascadeClassifier` object for this purpose,
@@ -219,17 +220,18 @@ and straightforward.
 
 ### Person Recognizer
 
-    #!c++
-    class PersonRecognizer {
-    public:
-        PersonRecognizer(const vector<Mat> &imgs, int radius, int neighbors,
-                int grid_x, int grid_y, double threshold);
-        virtual ~PersonRecognizer();
-        bool recognize(const Mat &face, double &confidence) const;
-    private:
-        Ptr<FaceRecognizer> _model;
-        Size _faceSize;
-    };
+```c++
+class PersonRecognizer {
+public:
+    PersonRecognizer(const vector<Mat> &imgs, int radius, int neighbors,
+            int grid_x, int grid_y, double threshold);
+    virtual ~PersonRecognizer();
+    bool recognize(const Mat &face, double &confidence) const;
+private:
+    Ptr<FaceRecognizer> _model;
+    Size _faceSize;
+};
+```
 
 Following the explanation about face recognition, we will be using the LBPH
 method. We will use OpenCV's [`FaceRecognizer`][13] module. Look at the [full
@@ -248,19 +250,20 @@ wrap with our own interface.
 
 We define the following class:
 
-    #!c++
-    class FramesReader
-    {
-    public:
-        FramesReader(const string &vidPath, int startFrame, int endFrame, int delta);
-        virtual ~FramesReader();
-        bool getNext(Mat &frame);
-        Size getSize();
-    private:
-        VideoCapture _vid;
-        int _endFrame,
-            _delta;
-    };
+```c++
+class FramesReader
+{
+public:
+    FramesReader(const string &vidPath, int startFrame, int endFrame, int delta);
+    virtual ~FramesReader();
+    bool getNext(Mat &frame);
+    Size getSize();
+private:
+    VideoCapture _vid;
+    int _endFrame,
+        _delta;
+};
+```
 
 We use the `getNext` method to obtain the next frame in the video, and
 `getSize` to obtain the size of the frame (in pixels).
@@ -268,31 +271,33 @@ We use the `getNext` method to obtain the next frame in the video, and
 ### Frames Writer
 We define the following class, which is self explanatory:
 
-    #!c++
-    class FramesWriter
-    {
-    public:
-        FramesWriter(const string vidPath, double fps, Size size, int fourcc);
-        virtual ~FramesWriter();
-        void write(Mat &frame);
-    private:
-        VideoWriter _vid;
-        Size _f_size;
-    };
+```c++
+class FramesWriter
+{
+public:
+    FramesWriter(const string vidPath, double fps, Size size, int fourcc);
+    virtual ~FramesWriter();
+    void write(Mat &frame);
+private:
+    VideoWriter _vid;
+    Size _f_size;
+};
+```
 
 ### CSV Writer
 
-    #!c++
-    class CsvWriter {
-    public:
-        CsvWriter(const string &csvPath);
-        virtual ~CsvWriter();
-        void nextLine();
-        void addEntry(const string &s);
-    private:
-        ofstream _fs;
-        bool _isFirstEntry;
-    };
+```c++
+class CsvWriter {
+public:
+    CsvWriter(const string &csvPath);
+    virtual ~CsvWriter();
+    void nextLine();
+    void addEntry(const string &s);
+private:
+    ofstream _fs;
+    bool _isFirstEntry;
+};
+```
 
 ## Results
 In order to test the application we run it on [this video of President Barack
@@ -352,20 +357,20 @@ more angles and positions.
 
 [post1]:opencv-installation-on-windows-netbeans-mingw.markdown
 
-[img1]:images/face-detection-and-recognition/features-eyebrows.jpg
-[img2]:images/face-detection-and-recognition/features-nose.jpg
-[img3]:images/face-detection-and-recognition/haar-eyes.jpg
-[img4]:images/face-detection-and-recognition/features-mouth.jpg
-[img5]:images/face-detection-and-recognition/features-chin.jpg
-[img6]:images/face-detection-and-recognition/haar-all.jpg
-[img7]:images/face-detection-and-recognition/obama-color.jpg
-[img8]:images/face-detection-and-recognition/obama-binary.jpg
-[img9]:images/face-detection-and-recognition/haar-features-all-obama.jpg
-[img10]:images/face-detection-and-recognition/training_set.jpg
-[img11]:images/face-detection-and-recognition/princomp.png
-[img12]:images/face-detection-and-recognition/eigenfaces.jpg
-[img13]:images/face-detection-and-recognition/lbp.jpg
-[img14]:images/face-detection-and-recognition/chart-confidence-600.png
-[img15]:images/face-detection-and-recognition/chart-appearances-600.png
-[img16]:images/face-detection-and-recognition/frame4100-600.jpg
-[img17]:images/face-detection-and-recognition/frame4600-600.jpg
+[img1]:../images/face-detection-and-recognition/features-eyebrows.jpg
+[img2]:../images/face-detection-and-recognition/features-nose.jpg
+[img3]:../images/face-detection-and-recognition/haar-eyes.jpg
+[img4]:../images/face-detection-and-recognition/features-mouth.jpg
+[img5]:../images/face-detection-and-recognition/features-chin.jpg
+[img6]:../images/face-detection-and-recognition/haar-all.jpg
+[img7]:../images/face-detection-and-recognition/obama-color.jpg
+[img8]:../images/face-detection-and-recognition/obama-binary.jpg
+[img9]:../images/face-detection-and-recognition/haar-features-all-obama.jpg
+[img10]:../images/face-detection-and-recognition/training_set.jpg
+[img11]:../images/face-detection-and-recognition/princomp.png
+[img12]:../images/face-detection-and-recognition/eigenfaces.jpg
+[img13]:../images/face-detection-and-recognition/lbp.jpg
+[img14]:../images/face-detection-and-recognition/chart-confidence-600.png
+[img15]:../images/face-detection-and-recognition/chart-appearances-600.png
+[img16]:../images/face-detection-and-recognition/frame4100-600.jpg
+[img17]:../images/face-detection-and-recognition/frame4600-600.jpg
