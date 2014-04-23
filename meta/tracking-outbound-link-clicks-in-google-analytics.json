@@ -7,6 +7,7 @@
     },
     "categories": ["technical"],
     "tags": ["google analytics", "tracking", "events", "callback", "javascript"],
+    "file": "../posts/tracking-outbound-link-clicks-in-google-analytics.markdown",
     "slug": "tracking-outbound-link-clicks-in-google-analytics",
     "authors": [{
         "name": "Eyal Arubas",

@@ -7,6 +7,7 @@
     },
     "categories": ["technical"],
     "tags": ["sublime text", "python", "plug-in"],
+    "file": "../posts/count-words-in-sublime-text-3.markdown",
     "slug": "count-words-in-sublime-text-3",
     "authors": [{
         "name": "Eyal Arubas",

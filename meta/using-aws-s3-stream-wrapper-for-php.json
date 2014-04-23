@@ -7,6 +7,7 @@
     },
     "categories": ["technical"],
     "tags": ["aws", "php", "s3", "stream wrapper"],
+    "file": "../posts/using-aws-s3-stream-wrapper-for-php.markdown",
     "slug": "using-aws-s3-stream-wrapper-for-php",
     "authors": [{
         "name": "Eyal Arubas",

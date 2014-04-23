@@ -7,6 +7,7 @@
     },
     "categories": ["technical"],
     "tags": ["python", "code", "subprocess", "non blocking"],
+    "file": "../posts/python-subproc-nonblock.markdown",
     "slug": "python-subproc-nonblock",
     "authors": [{
         "name": "Eyal Arubas",

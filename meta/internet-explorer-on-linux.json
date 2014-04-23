@@ -7,6 +7,7 @@
     },
     "categories": ["technical"],
     "tags": ["internet explorer", "linux", "virtual" "machine", "virtualization"],
+    "file": "../posts/internet-explorer-on-linux.markdown",
     "slug": "internet-explorer-on-linux",
     "authors": [{
         "name": "Eyal Arubas",
