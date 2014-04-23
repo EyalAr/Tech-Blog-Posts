@@ -1,0 +1,78 @@
+<html>
+<head>
+	<title>Testing websites on Internet Explorer under Linux</title>
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="highlight.css">
+	<style type="text/css">
+		iframe{
+			width: 100%;
+			border: solid 1px #ccc;
+			border-radius: 5px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8">
+				<h1>Testing websites on Internet Explorer under Linux</h1>
+				<div>
+					5/1/2014
+				</div>
+				<div>
+					Eyal Arubas &lt;eyalarubas@gmail.com&gt;
+				</div>
+				<hr>
+				<div>
+					<p>As every web developer knows, debugging your website requires testing it on
+different browsers. Every browser (or at least every rendering and Javascript
+engines) is different in the way it parses and presents web pages. Different
+implementations of web standards have different bugs, different ways of
+presenting a layout and require the developer to be aware of their own unique
+quirks. Although the most recent versions of browsers have better compliance
+with web standards, and there is a better uniformity in the way browsers render
+web pages; there is still a large percentage of users using older versions.</p>
+<p>JS and CSS frameworks and libraries usually handle browser differences for us
+and provide a consistent interface, but manual adjustments are usually required.
+Testing on different browsers ensures us that our application works as expected
+for all our users.</p>
+<p>But this post is not about the differences between browsers, which are just a
+fact; it&#39;s about one specific problem many developers who work on Linux face -
+how to debug and test on Internet Explorer, when you can&#39;t even run it on your
+system.</p>
+<p>Most of us know the &quot;screenshots&quot; websites, which provide a screenshot of how
+a website looks on different browsers. But this has never worked well for me,
+for two reasons:</p>
+<ol>
+<li>You can&#39;t test dynamic content, and specifically functionalities which
+require Javascript.</li>
+<li>Using these websites is a pain (Broken systems, long wait times,
+inability to scroll the page, etc...).</li>
+</ol>
+<p>One solution is to dual boot your system with Windows. But this does not allow
+you to work on your code while testing. You have to stop your work, reboot
+your system, do your tests (sometimes you just want to see how a page looks
+like on IE) and reboot again. This is a hassle. And also, you need a Windows
+license.</p>
+<p>The most viable solution, at least for me, is to run Windows on a virtual
+machine using <a href="https://www.virtualbox.org/">Virtual Box</a>. Microsoft releases Windows&#39; <a href="http://www.modern.ie/en-us/virtualization-tools">VMs with different
+versions IE</a> just for this purpose. After installing Virtual Box, running
+the VMs is easy. Just follow the download instructions, extract the archive and
+import the VM image into Virtual Box.</p>
+<p><img src="../images/internet-explorer-on-linux/ie8vm.png" alt="IE8, Windows 7"></p>
+<p>Default VM settings should be sufficient to enable network access. The default
+settings use the NAT protocol to connect the virtual machine to the Internet.
+In this case your Linux system will serve as the VM&#39;s default gateway. If you
+run a local development server on your Linux system, you may access <code>localhost</code>
+from the virtual box using the default gateway&#39;s address. Just run <code>ipconfig</code>
+from Windows&#39; command prompt to find what it is.</p>
+<p><img src="../images/internet-explorer-on-linux/cmd.png" alt="ipconfig"></p>
+
+				</div>
+			</div>
+			<div class="col-sm-2"></div>
+		</div>
+	</div>
+</body>
+</html>
