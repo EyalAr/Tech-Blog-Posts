@@ -18,7 +18,7 @@
 			<div class="col-sm-8">
 				<h1>{{title}}</h1>
 				<div>
-					{{date.day}}/{{date.month}}/{{date.year}}
+					{{date}}
 				</div>
 				{{#authors}}
 				<div>

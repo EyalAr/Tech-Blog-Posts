@@ -1,5 +1,6 @@
 {
     "metadata": "./meta",
     "theme": "./theme",
-    "build": "./build"
+    "build": "./build",
+    "dateFormat": "dddd, D MMMM YYYY"
 }
