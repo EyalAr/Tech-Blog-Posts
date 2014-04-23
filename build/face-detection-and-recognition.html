@@ -3,6 +3,7 @@
 	<title>Face Detection and Recognition (Theory and Practice)</title>
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="highlight.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<style type="text/css">
 		iframe{
 			width: 100%;
@@ -16,12 +17,17 @@
 		<div class="row">
 			<div class="col-sm-2"></div>
 			<div class="col-sm-8">
+				<div id="links">
+					<span class="link"><a href="index.html">Index</a></span>
+					<span class="link"><a href="http://about.eyalarubas.com">About & Contact</a></span>
+					<span class="link"><a href="https://www.goodreads.com/review/list/7034243-eyal">Reading List</a></span>
+				</div>
 				<h1>Face Detection and Recognition (Theory and Practice)</h1>
 				<div>
-					Monday, 6 May 2013
+					Saturday, 6 April 2013
 				</div>
 				<div>
-					Eyal Arubas &lt;eyalarubas@gmail.com&gt;
+					Eyal Arubas
 				</div>
 				<hr>
 				<div>
@@ -30,8 +36,8 @@ Wagner</a>). It contains algorithms which can be used to perform some cool
 stuff. In this guide I will roughly explain how face detection and recognition
 work; and build a demo application using OpenCV which will detect and recognize
 faces. (Also, there is a nice video of the result at the end).</p>
-<h1 id="theory">Theory</h1>
-<h2 id="face-detection">Face Detection</h2>
+<h2 id="theory">Theory</h2>
+<h3 id="face-detection">Face Detection</h3>
 <p>As can be assumed, detecting a face is simpler than recognizing a face of a
 specific person. In order to be able to determine that a certain picture
 contains a face (or several) we need to be able to define the general structure
@@ -71,7 +77,7 @@ method</a> (also known as Haar cascades). A very nice visualization of this
 method can be seen in the following video by Adam Harvey.</p>
 <iframe src="//player.vimeo.com/video/12774628" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
-<h2 id="face-recognition">Face Recognition</h2>
+<h3 id="face-recognition">Face Recognition</h3>
 <p>The difference between face detection and recognition is that in detection we
 just need to determine if there is some face in the image, but in recognition
 we want to determine whose face it is. In the above example we <em>detected</em> a
@@ -90,7 +96,7 @@ training set a bit differently.</p>
 features of the training set as a whole. LBPH analyzes each face in the
 training set separately and independently.</p>
 <p>An example training set:<br><img src="../images/face-detection-and-recognition/training_set.jpg" alt="Example Training Set"></p>
-<h3 id="eigenfaces-fisherfaces">Eigenfaces &amp; Fisherfaces</h3>
+<h4 id="eigenfaces-fisherfaces">Eigenfaces &amp; Fisherfaces</h4>
 <p>Those familiar with linear algebra will remember that every vector space has
 an orthogonal basis. By combining elements of this basis we can compose every
 vector in this vector space. And vice versa, every vector in the vector space
@@ -113,7 +119,7 @@ which can be <a href="https://gist.github.com/EyalAr/5196200">obtained here</a>)
 <p>Now, whenever we are provided with a new, unknown, face, we can decompose it to
 the basis we found, see which eigenvector(s) “explain” most of the face, and
 thus determine to which person it belongs.</p>
-<h3 id="local-binary-patterns-histogram">Local Binary Patterns Histogram</h3>
+<h4 id="local-binary-patterns-histogram">Local Binary Patterns Histogram</h4>
 <p>The <a href="http://en.wikipedia.org/wiki/Local_binary_patterns">LBPH</a> method takes a different approach than the eigenfaces method.
 In LBPH each images is analyzed independently, while the eigenfaces method
 looks at the dataset as a whole. The LBPH method is somewhat simpler, in the
@@ -125,7 +131,7 @@ images is by characterizing the local patterns in each location in the image.</p
 of the dataset from above:</p>
 <p><img src="../images/face-detection-and-recognition/lbp.jpg" alt="Local binary patterns of the 10 images in the training set"><br>(To extract the local binary patterns of the training set I used this <a href="http://www.mathworks.com/matlabcentral/fileexchange/36484-local-binary-patterns">Matlab
 script</a>).</p>
-<h1 id="demo-application">Demo Application</h1>
+<h2 id="demo-application">Demo Application</h2>
 <p>For the purpose of this guide, and to make it interesting, we will build an
 application which given a video file and a person, seeks this person in the
 video. Formally, we define the following inputs and outputs of our application:</p>
@@ -144,7 +150,7 @@ unrecognized faces in red circles.</li>
 <li>A CSV file which gives the recognition confidence for each recognized
 face in each frame of the video.</li>
 </ol>
-<h2 id="the-plan">The Plan</h2>
+<h3 id="the-plan">The Plan</h3>
 <p>Before we start coding, we better understand the different components in our
 application.</p>
 <p>As was already mentioned, our goal is to determine in which frames of the video
@@ -171,11 +177,11 @@ red circle.</li>
 </ol>
 <p>Each of these components will be expanded in the following sections.</p>
 <p><strong>Note:</strong><br>In order to simplify this guide, we will do only frontal faces detection.</p>
-<h2 id="the-code">The Code</h2>
+<h3 id="the-code">The Code</h3>
 <p>The full code of the application can be obtained in <a href="https://bitbucket.org/EyalAr/person-recognizer">this git repository</a>
 (It&#39;s a <a href="opencv-installation-on-windows-netbeans-mingw.markdown">Netbeans project</a> which you can load directly to your
 <a href="https://netbeans.org/">Netbeans IDE</a>).</p>
-<h3 id="faces-detector">Faces Detector</h3>
+<h4 id="faces-detector">Faces Detector</h4>
 <pre><code class="lang-c++"><span class="hljs-keyword">class</span> FaceDetector {
 <span class="hljs-keyword">public</span>:
     FaceDetector(
@@ -202,7 +208,7 @@ which I recommend reading about (<a href="http://docs.opencv.org/modules/objdete
 of all faces in it. Note that in this application we detect only frontal faces.
 Implementing detection of profiles and faces from other angles is very similar
 and straightforward.</p>
-<h3 id="person-recognizer">Person Recognizer</h3>
+<h4 id="person-recognizer">Person Recognizer</h4>
 <pre><code class="lang-c++"><span class="hljs-keyword">class</span> PersonRecognizer {
 <span class="hljs-keyword">public</span>:
     PersonRecognizer(<span class="hljs-keyword">const</span> <span class="hljs-stl_container"><span class="hljs-built_in">vector</span>&lt;Mat&gt;</span> &amp;imgs, <span class="hljs-keyword">int</span> radius, <span class="hljs-keyword">int</span> neighbors,
@@ -224,7 +230,7 @@ face will determine if this is the person the class was trained to recognize.
 The method returns a Boolean value according to the result of the recognition,
 and if there was recognition, the confidence is stored in the <code>confidence</code>
 variable.</p>
-<h3 id="frames-reader">Frames Reader</h3>
+<h4 id="frames-reader">Frames Reader</h4>
 <p>Luckily, OpenCV offers a good library for handling video files, which we will
 wrap with our own interface.</p>
 <p>We define the following class:</p>
@@ -243,7 +249,7 @@ wrap with our own interface.</p>
 </code></pre>
 <p>We use the <code>getNext</code> method to obtain the next frame in the video, and
 <code>getSize</code> to obtain the size of the frame (in pixels).</p>
-<h3 id="frames-writer">Frames Writer</h3>
+<h4 id="frames-writer">Frames Writer</h4>
 <p>We define the following class, which is self explanatory:</p>
 <pre><code class="lang-c++">class FramesWriter
 {
@@ -256,7 +262,7 @@ wrap with our own interface.</p>
     Size _f_size;
 };
 </code></pre>
-<h3 id="csv-writer">CSV Writer</h3>
+<h4 id="csv-writer">CSV Writer</h4>
 <pre><code class="lang-c++">class CsvWriter {
 <span class="hljs-keyword">public</span>:
     <span class="hljs-title">CsvWriter</span>(<span class="hljs-keyword">const</span> <span class="hljs-keyword">string</span> &amp;csvPath);
@@ -268,7 +274,7 @@ wrap with our own interface.</p>
     <span class="hljs-keyword">bool</span> _isFirstEntry;
 };
 </code></pre>
-<h2 id="results">Results</h2>
+<h3 id="results">Results</h3>
 <p>In order to test the application we run it on <a href="http://www.whitehouse.gov/photos-and-video/video/2013/03/12/president-obama-speaks-presidents-export-council-meeting">this video of President Barack
 Obama</a>. We use the training set from above.</p>
 <p>The resulting output video:</p>
@@ -284,7 +290,7 @@ of which frames contain the face (frontal) of President Obama:</p>
 President Obama does not face forward, but in frame 4600 he does:</p>
 <p>Frame 4100:<br><img src="../images/face-detection-and-recognition/frame4100-600.jpg" alt="Frame 4100"></p>
 <p>Frame 4600:<br><img src="../images/face-detection-and-recognition/frame4600-600.jpg" alt="Frame 4600"></p>
-<h1 id="summary">Summary</h1>
+<h2 id="summary">Summary</h2>
 <p>We have seen examples of both detection and recognition of faces. The theory
 behind the two subjects is quite interesting. The OpenCV library implements for
 us the major algorithms used for these tasks.</p>
@@ -296,6 +302,9 @@ person (President Obama) faces towards the camera.</p>
 frontal faces, but it can be easily extended to recognize and detect faces in
 more angles and positions.</p>
 
+				</div>
+				<footer class="footer">
+					Generated from <a href="https://raw.githubusercontent.com/EyalAr/Tech-Blog-Posts/master/posts/face-detection-and-recognition.markdown">Markdown source</a> using <a href="https://github.com/EyalAr/Contrive">Contrive</a>.
 				</div>
 			</div>
 			<div class="col-sm-2"></div>

@@ -4,8 +4,8 @@ stuff. In this guide I will roughly explain how face detection and recognition
 work; and build a demo application using OpenCV which will detect and recognize
 faces. (Also, there is a nice video of the result at the end).
 
-# Theory
-## Face Detection
+## Theory
+### Face Detection
 As can be assumed, detecting a face is simpler than recognizing a face of a
 specific person. In order to be able to determine that a certain picture
 contains a face (or several) we need to be able to define the general structure
@@ -57,7 +57,7 @@ method can be seen in the following video by Adam Harvey.
 
 <iframe src="//player.vimeo.com/video/12774628" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
-## Face Recognition
+### Face Recognition
 The difference between face detection and recognition is that in detection we
 just need to determine if there is some face in the image, but in recognition
 we want to determine whose face it is. In the above example we *detected* a
@@ -83,7 +83,7 @@ training set separately and independently.
 An example training set:  
 ![Example Training Set][img10]
 
-### Eigenfaces & Fisherfaces
+#### Eigenfaces & Fisherfaces
 Those familiar with linear algebra will remember that every vector space has
 an orthogonal basis. By combining elements of this basis we can compose every
 vector in this vector space. And vice versa, every vector in the vector space
@@ -114,7 +114,7 @@ Now, whenever we are provided with a new, unknown, face, we can decompose it to
 the basis we found, see which eigenvector(s) “explain” most of the face, and
 thus determine to which person it belongs.
 
-### Local Binary Patterns Histogram
+#### Local Binary Patterns Histogram
 The [LBPH][8] method takes a different approach than the eigenfaces method.
 In LBPH each images is analyzed independently, while the eigenfaces method
 looks at the dataset as a whole. The LBPH method is somewhat simpler, in the
@@ -130,7 +130,7 @@ of the dataset from above:
 (To extract the local binary patterns of the training set I used this [Matlab
 script][9]).
 
-# Demo Application
+## Demo Application
 For the purpose of this guide, and to make it interesting, we will build an
 application which given a video file and a person, seeks this person in the
 video. Formally, we define the following inputs and outputs of our application:
@@ -150,7 +150,7 @@ video. Formally, we define the following inputs and outputs of our application:
 2.  A CSV file which gives the recognition confidence for each recognized
     face in each frame of the video.
 
-## The Plan
+### The Plan
 Before we start coding, we better understand the different components in our
 application.
 
@@ -181,12 +181,12 @@ Each of these components will be expanded in the following sections.
 **Note:**  
 In order to simplify this guide, we will do only frontal faces detection.
 
-## The Code
+### The Code
 The full code of the application can be obtained in [this git repository][10]
 (It's a [Netbeans project][post1] which you can load directly to your
 [Netbeans IDE][11]).
 
-### Faces Detector
+#### Faces Detector
 
 ```c++
 class FaceDetector {
@@ -218,7 +218,7 @@ of all faces in it. Note that in this application we detect only frontal faces.
 Implementing detection of profiles and faces from other angles is very similar
 and straightforward.
 
-### Person Recognizer
+#### Person Recognizer
 
 ```c++
 class PersonRecognizer {
@@ -244,7 +244,7 @@ The method returns a Boolean value according to the result of the recognition,
 and if there was recognition, the confidence is stored in the `confidence`
 variable.
 
-### Frames Reader
+#### Frames Reader
 Luckily, OpenCV offers a good library for handling video files, which we will
 wrap with our own interface.
 
@@ -268,7 +268,7 @@ private:
 We use the `getNext` method to obtain the next frame in the video, and
 `getSize` to obtain the size of the frame (in pixels).
 
-### Frames Writer
+#### Frames Writer
 We define the following class, which is self explanatory:
 
 ```c++
@@ -284,7 +284,7 @@ private:
 };
 ```
 
-### CSV Writer
+#### CSV Writer
 
 ```c++
 class CsvWriter {
@@ -299,7 +299,7 @@ private:
 };
 ```
 
-## Results
+### Results
 In order to test the application we run it on [this video of President Barack
 Obama][14]. We use the training set from above.
 
@@ -326,7 +326,7 @@ Frame 4100:
 Frame 4600:  
 ![Frame 4600][img17]
 
-# Summary
+## Summary
 We have seen examples of both detection and recognition of faces. The theory
 behind the two subjects is quite interesting. The OpenCV library implements for
 us the major algorithms used for these tasks.

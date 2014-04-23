@@ -2,5 +2,6 @@
     "metadata": "./meta",
     "theme": "./theme",
     "build": "./build",
-    "dateFormat": "dddd, D MMMM YYYY"
+    "dateFormat": "dddd, D MMMM YYYY",
+    "globals": "./globals.json"
 }

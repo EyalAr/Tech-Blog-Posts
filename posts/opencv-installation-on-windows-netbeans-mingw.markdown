@@ -20,7 +20,7 @@ Windows 7, OpenCV 2.4.0, Netbeans 7 and MinGW 3.20 (with compiler gcc 4.6.2).
 **Assumptions**:
 You already have MinGW and Netbeans installed on your system.
 
-# Compiling and installing OpenCV
+## Compiling and installing OpenCV
 When downloading OpenCV, the archive actually already contains pre-built
 binaries (compiled libraries and DLL's) in the 'build' folder. At first, I
 tried using those binaries, assuming somebody had already done the job of
@@ -72,7 +72,7 @@ The steps are:
        to the system PATH**. This will make sure our programs can find the
        needed DLL's to run.
 
-# Configuring Netbeans
+## Configuring Netbeans
 Netbeans should be told where to find the header files and the compiled
 libraries (which were created in the previous section).
 
@@ -111,7 +111,7 @@ your program.
 
 That's it, you are now ready to use OpenCV!
 
-# Summary
+## Summary
 Here are the general steps you need to complete in order to install OpenCV and
 use it with Netbeans:
 
@@ -125,7 +125,7 @@ use it with Netbeans:
 5. Add the specific libraries you need to be linked with your project (for
    example: libopencv_core240.dll.a).
 
-# Example – "Hello World" with OpenCV
+## Example - "Hello World" with OpenCV
 Here is a small example program which draws the text "Hello World : )" on a GUI
 window. You can use it to check that your installation works correctly. After
 compiling and running the program, you should see the following window:

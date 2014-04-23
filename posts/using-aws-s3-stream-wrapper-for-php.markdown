@@ -1,9 +1,9 @@
-Amazon’s [AWS PHP SDK][1] offers a [stream wrapper][2] for S3.
+Amazon's [AWS PHP SDK][1] offers a [stream wrapper][2] for S3.
 
-By registering the `s3://` protocol, it’s possible to use PHP’s file handling
+By registering the `s3://` protocol, it's possible to use PHP's file handling
 functions; such as `fopen()`, `fread()`, `rename()`, `mkdir()`, `unlink()`,
 etc...; directly with URLs in the form of `s3://bucket/path/to/object`. Thus,
-eliminating the cumbersome syntax of the API’s methods.
+eliminating the cumbersome syntax of the API's methods.
 
 Without the stream wrapper, we would have to write more code in order to
 achieve desired operations. For example:
@@ -47,7 +47,7 @@ $response = $s3->create_object(
 ?>
 ```
 
-But with the stream wrapper, we can use PHP’s corresponding functions, in a neater and shorter fashion.
+But with the stream wrapper, we can use PHP's corresponding functions, in a neater and shorter fashion.
 
 First, we have to register the `s3://` protocol:
 
@@ -97,7 +97,7 @@ One thing which is important to note:
 > amount of memory allocated to PHP, otherwise “out of memory” errors will
 > occur.
 
-([Quoted from the SDK’s documentation][3])
+([Quoted from the SDK's documentation][3])
 
 So, if you handle large file in your code, and encounter such errors, there is
 no alternative (which I know of) than to revert to the ordinary methods of the

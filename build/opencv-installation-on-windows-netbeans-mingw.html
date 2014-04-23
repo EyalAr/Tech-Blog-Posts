@@ -3,6 +3,7 @@
 	<title>OpenCV Installation on Windows + Netbeans + MinGW</title>
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="highlight.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<style type="text/css">
 		iframe{
 			width: 100%;
@@ -16,12 +17,17 @@
 		<div class="row">
 			<div class="col-sm-2"></div>
 			<div class="col-sm-8">
+				<div id="links">
+					<span class="link"><a href="index.html">Index</a></span>
+					<span class="link"><a href="http://about.eyalarubas.com">About & Contact</a></span>
+					<span class="link"><a href="https://www.goodreads.com/review/list/7034243-eyal">Reading List</a></span>
+				</div>
 				<h1>OpenCV Installation on Windows + Netbeans + MinGW</h1>
 				<div>
-					Friday, 23 November 2012
+					Tuesday, 23 October 2012
 				</div>
 				<div>
-					Eyal Arubas &lt;eyalarubas@gmail.com&gt;
+					Eyal Arubas
 				</div>
 				<hr>
 				<div>
@@ -44,7 +50,7 @@ which will hopefully help others.</p>
 Windows 7, OpenCV 2.4.0, Netbeans 7 and MinGW 3.20 (with compiler gcc 4.6.2).</p>
 <p><strong>Assumptions</strong>:
 You already have MinGW and Netbeans installed on your system.</p>
-<h1 id="compiling-and-installing-opencv">Compiling and installing OpenCV</h1>
+<h2 id="compiling-and-installing-opencv">Compiling and installing OpenCV</h2>
 <p>When downloading OpenCV, the archive actually already contains pre-built
 binaries (compiled libraries and DLL&#39;s) in the &#39;build&#39; folder. At first, I
 tried using those binaries, assuming somebody had already done the job of
@@ -91,7 +97,7 @@ needed DLL&#39;s to run.</li>
 </ol>
 </li>
 </ol>
-<h1 id="configuring-netbeans">Configuring Netbeans</h1>
+<h2 id="configuring-netbeans">Configuring Netbeans</h2>
 <p>Netbeans should be told where to find the header files and the compiled
 libraries (which were created in the previous section).</p>
 <p>The header files are needed for two reasons: for compilation and for code
@@ -118,7 +124,7 @@ the <code>core</code> library plus any other libraries according to the specific
 your program.</p>
 <p><img src="../images/opencv-installation-on-windows-netbeans-mingw/netbeans-use-libraries.png" alt="Netbeans Include Libraries"></p>
 <p>That&#39;s it, you are now ready to use OpenCV!</p>
-<h1 id="summary">Summary</h1>
+<h2 id="summary">Summary</h2>
 <p>Here are the general steps you need to complete in order to install OpenCV and
 use it with Netbeans:</p>
 <ol>
@@ -132,7 +138,7 @@ libraries path (in our case: c:/opencv/release/lib).</li>
 <li>Add the specific libraries you need to be linked with your project (for
 example: libopencv_core240.dll.a).</li>
 </ol>
-<h1 id="example-hello-world-with-opencv">Example – &quot;Hello World&quot; with OpenCV</h1>
+<h2 id="example-hello-world-with-opencv">Example - &quot;Hello World&quot; with OpenCV</h2>
 <p>Here is a small example program which draws the text &quot;Hello World : )&quot; on a GUI
 window. You can use it to check that your installation works correctly. After
 compiling and running the program, you should see the following window:</p>
@@ -168,6 +174,9 @@ compiling and running the program, you should see the following window:</p>
 }
 </code></pre>
 
+				</div>
+				<footer class="footer">
+					Generated from <a href="https://raw.githubusercontent.com/EyalAr/Tech-Blog-Posts/master/posts/opencv-installation-on-windows-netbeans-mingw.markdown">Markdown source</a> using <a href="https://github.com/EyalAr/Contrive">Contrive</a>.
 				</div>
 			</div>
 			<div class="col-sm-2"></div>
