@@ -2,8 +2,6 @@
 
 ...Because generators can make asynchronous code look attractive.
 
-How? Read the long answer...
-
 ## The long answer
 
 Anyone who's been working with Javascript / NodeJS for even a short while should be familiar with callbacks. A lot has been said about Javascript's callback mechanism; specifically about the code attractiveness (or lack thereof) when employing callbacks for serial asynchronous operations. A classic example is the one in which we use NodeJS to do a number of serial asynchronous IO calls:
@@ -11,11 +9,11 @@ Anyone who's been working with Javascript / NodeJS for even a short while should
 ```Javascript
 var db = require('db');
 db.get( /* some query */, function(err, result){
-	/* handle error, and / or: /*
+	/* handle error, and / or: */
 	db.get( /* another query */, function(err, result){
-		/* handle error, and / or: /*
+		/* handle error, and / or: */
 		db.insert( /* ... */, function(err){
-			/* handle error, and / or: /*
+			/* handle error, and / or: */
 			db.update( /* ... */, function(err){
 				/* ... */
 			});
