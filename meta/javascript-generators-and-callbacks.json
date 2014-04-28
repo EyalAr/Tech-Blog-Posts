@@ -1,0 +1,15 @@
+{
+    "title": "What Are Javascript Generators And Why Should You Care?",
+    "date": {
+        "day": 28,
+        "month": 4,
+        "year": 2014
+    },
+    "categories": ["technical"],
+    "file": "../posts/javascript-generators-and-callbacks.markdown",
+    "slug": "javascript-generators-and-callbacks",
+    "authors": [{
+        "name": "Eyal Arubas",
+        "email": "eyalarubas@gmail.com"
+    }]
+}
