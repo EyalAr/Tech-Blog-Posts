@@ -65,4 +65,18 @@ Other solutions use different approaches to achieve the same goals. The [promise
 
 With promises we wrap asynchronous code in a `promise` object. We defer the result of the asynchronous operation to a later time, at which the promise is 'resolved' (or 'rejected' on error). We can bind our own callbacks to events in the promise life (such as when it is resolved or rejected).
 
-I am personally less fond of this mechanism, but it's important to be aware of it.
+Personally, I am less fond of this mechanism, but it's important to be aware of it.
+
+All of these mechanisms don't introduce new functionalities to our good old Javascript; but rather do sophisticated manipulations to our asynchronous functions in order to make our code more readable.
+
+### How it's done after generators
+
+Let's first discuss what are generators.
+
+Generators are function-like objects which generate iterators.
+
+What are iterators? Iterators are function-like objects which provide a sequential list of values. From the outside, an iterator is just an object with some methods to help us control it. For example, iterators have a `next()` method which we call to retrieve the next value. Obviously iterators have a state which is preserved between calls to `next()`.
+
+This concept should be familiar for anyone coming from languages such as Python, Java, C++, etc. In those language iterators are implemented with classes which we use to generate these 'iterator' objects. They define the internals of the iterator (to make it stateful) and methods which the iterator must have according to the specifications of the language.
+
+Let's say we want an iterator which iterates through all 
