@@ -1,4 +1,4 @@
-In this post I'll show you how to build a simple 10-lines Javascript library to handle asynchronous callbacks with the generators mechanism.
+In this post I'll show you how to build a simple Javascript library to handle asynchronous callbacks with the generators mechanism.
 
 So, what are Javascript generators and why should you care?
 
@@ -12,14 +12,14 @@ Anyone who's been working with Javascript / NodeJS for even a short while should
 
 ```Javascript
 var db = require('db');
-db.get( /* some query */, function(err, result){
-	/* handle error, and / or: */
-	db.get( /* another query */, function(err, result){
-		/* handle error, and / or: */
-		db.insert( /* ... */, function(err){
-			/* handle error, and / or: */
-			db.update( /* ... */, function(err){
-				/* ... */
+db.get( /** some query */, function(err, result){
+	/** handle error, and / or: */
+	db.get( /** another query */, function(err, result){
+		/** handle error, and / or: */
+		db.insert( /** ... */, function(err){
+			/** handle error, and / or: */
+			db.update( /** ... */, function(err){
+				/** ... */
 			});
 		});
 	});
@@ -43,23 +43,23 @@ var db = require('db'),
 
 async.waterfall([
 	function(next){
-		db.get( /* some query */, next);
+		db.get( /** some query */, next);
 	},
 
 	function(result, next){
-		db.get( /* another query */, next);
+		db.get( /** another query */, next);
 	},
 
 	function(result, next){
-		db.insert( /* ... */, next);
+		db.insert( /** ... */, next);
 	},
 
 	function(next){
-		db.update( /* ... */, next);
+		db.update( /** ... */, next);
 	}
 ],
 function(err){
-	/* handle error */
+	/** handle error */
 });
 ```
 
@@ -110,7 +110,7 @@ Why is this important? I'll repeat:
 
 Imagine we could suspend the run of a function while it waits some asynchronous callback to complete. Well, with generators we can. And it's rather simple. But we'll get to that in a minute.
 
-First we need to discuss how to transfer information to / from a generator. We already know that `next()` is used to get the next yielded value from the generator. We can also use `next( /* some value */ )` to send values back to the most recently called `yield` expression. Inside the generator function, whatever we send back with `next` will be evaluated as the result of the `yield` expression. This is very important, because it means that once the generator resumes from its suspended state in order to yield the next value, we can actually change its internal state.
+First we need to discuss how to transfer information to / from a generator. We already know that `next()` is used to get the next yielded value from the generator. We can also use `next( /** some value */ )` to send values back to the most recently called `yield` expression. Inside the generator function, whatever we send back with `next` will be evaluated as the result of the `yield` expression. This is very important, because it means that once the generator resumes from its suspended state in order to yield the next value, we can actually change its internal state.
 
 OK, another example. This time we want to generate a series of even numbers, but be able to to reverse the order of iteration.
 
@@ -207,7 +207,7 @@ Some may argue that imposing synchronicity on asynchronous operations defeats th
 Taking the above example, we can build on it to handle any generator whatsoever. Let's build a NodeJS module to do that. We will show here only the basics, upon which we can build cool things like centralized errors handling, waiting for parallel asynchronous operations, etc. [See this repository for more](https://github.com/EyalAr/Subdue).
 
 ```Javascript
-/*
+/**
  * Take a generator, provide it with a 'resume' function
  * and run it.
  *
