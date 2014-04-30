@@ -1,6 +1,6 @@
 In this post I'll show you how to build a simple 10-lines Javascript library to handle asynchronous callbacks with the generators mechanism.
 
-So, what are javascript generators and why should you care?
+So, what are Javascript generators and why should you care?
 
 ## The short answer
 
@@ -110,7 +110,7 @@ Why is this important? I'll repeat:
 
 Imagine we could suspend the run of a function while it waits some asynchronous callback to complete. Well, with generators we can. And it's rather simple. But we'll get to that in a minute.
 
-First we need to discuss how to transfer data to / from a generator. We already know that `next()` is used to get the next yielded value from the generator. We can also use `next( /* some value */ )` to send values back to the most recently called `yield` expression. Inside the generator function, whatever we send back with `next` will be evaluated as the result of the `yield` expression. This is very important, because it means that once the generator resumes from its suspended state in order to yield the next value, we can actually change its internal state.
+First we need to discuss how to transfer information to / from a generator. We already know that `next()` is used to get the next yielded value from the generator. We can also use `next( /* some value */ )` to send values back to the most recently called `yield` expression. Inside the generator function, whatever we send back with `next` will be evaluated as the result of the `yield` expression. This is very important, because it means that once the generator resumes from its suspended state in order to yield the next value, we can actually change its internal state.
 
 OK, another example. This time we want to generate a series of even numbers, but be able to to reverse the order of iteration.
 
@@ -138,7 +138,7 @@ evens.next().value; // 6
 
 So `yield start;` evaluates to whatever we send to `next()`. Pretty cool.
 
-So what does all of this have to do with asynchronous code you ask? Good question. Many articles across the net show how to use generators with promises, or show how to use some external libraries. But I want neither. I'm not a fan of promises, and I want to know what is actually going on behind the scenes. Apparently it's not very complicated.
+So what does all of this have to do with asynchronous code you ask? Good question. Many articles across the net show to how control the flow of asynchronous operations by using generators with promises; or show how to use some external libraries. But I want neither. I'm not a fan of promises, and I want to know what is actually going on behind the scenes. Apparently it's not very complicated.
 
 Let's contrive another useless example:
 
@@ -168,7 +168,7 @@ getFoo(function(val) {
 
 As expected, after 400ms 'hello world' will be printed. Now let's use generators to make this code more readable.
 
-We will build our own library. We want to be able to suspend our code while we wait for the result of some asynchronous operation. We have already seen how generator functions can be suspended. Great, let's wrap our code with a generator function. Every time we need to wait for an asynchronous operation, we will call `yield`. Whenever the asynchronous operation finishes we will call `next()` with the result, thus passing the result back to our code.
+We want to be able to suspend our code while we wait for the result of some asynchronous operation. We have already seen how generator functions can be suspended. Great, let's wrap our code with a generator function. Every time we need to wait for an asynchronous operation, we will call `yield`. Whenever the asynchronous operation finishes we will call `next()` with the result, thus passing the result back to our code.
 
 We want something like this:
 
@@ -181,7 +181,7 @@ function * run (){
 run();
 ```
 
-Running this code will do nothing, as we never actually call `next` to start and resume the generator. We need to do that from outside the generator. But timing is important. We must resume the generator only when the value from the asynchronous operation is ready. We have no choice but to delegate this responsibility to the asynchronous functions themselves. Luckily they accept a callback function which is run once the asynchronous operation is complete. Whenever they are ready with the value, they will resume our generator for us. In order to allow this, we will provide to the generator a special function `resume`. `resume` will be passed as a callback to the asynchronous operations.
+Running this code will do nothing, as we never actually call `next` to start and resume the generator. We need to do that from outside the generator. But timing is important. We must resume the generator only when the value from the asynchronous operation is ready. We have no choice but to delegate this responsibility to the asynchronous functions themselves. Luckily they accept a callback function which is run once the asynchronous operation is complete. Whenever they are ready with the value, they will resume our generator for us. In order to allow this, we will provide to the generator a special function `resume`. `resume` will be passed as a callback to the asynchronous functions.
 
 ```Javascript
 var r = run(resume);
@@ -197,3 +197,50 @@ function * run(resume) {
     console.log(foo, bar); // hello world
 }
 ```
+
+Simple. `resume` simply sends back the result (`value`) of the asynchronous operation back into the generator, in place of the last `yield` expression. Things are happening asynchronously, but instead of writing nested callbacks to react in a specific way to each asynchronous operation; we just wait for the operation to complete, send the result back to our main flow of control and continue as if things are happening synchronously.
+
+Some may argue that imposing synchronicity on asynchronous operations defeats the purpose of asynchronicity. True. But that's not what happening here. We wait only when we must wait for an asynchronous operation to complete. Exactly as we would with classical nested callbacks.
+
+### Make it a library
+
+Taking the above example, we can build on it to handle any generator whatsoever. Let's build a NodeJS module to do that. We will show here only the basics, upon which we can build cool things like centralized errors handling, waiting for parallel asynchronous operations, etc. [See this repository for more](https://github.com/EyalAr/Subdue).
+
+```Javascript
+/*
+ * Take a generator, provide it with a 'resume' function
+ * and run it.
+ *
+ * assume callbacks are in standard NodeJS form:
+ *
+ *     function(err, result)
+ *
+ */
+module.exports = function(generator){
+
+    var run;
+
+    function resume(err, result){
+
+        // if the callback returned an error
+        // make the generator throw it.
+        if (err) return run.throw(err);
+
+        // pass the result to the last 'yield'
+        // expression by calling generator's
+        // 'next' with the result
+        run.next.call(run, result);
+
+    }
+
+    run = generator(resume);
+    run.next(); // start the generator immediately
+
+};
+```
+
+That's it. Of course a full fledged library has to deal with edge cases, validate arguments, etc. There are a few nice ones out there, such as [suspend](https://github.com/jmar777/suspend), [galaxy](https://github.com/bjouhier/galaxy) and [genny](https://github.com/spion/genny). Check them out.
+
+### Where to go from here
+
+Javascript generators are only available in engines that implement [ECMAScript 6](https://developer.mozilla.org/en/docs/Web/JavaScript/ECMAScript_6_support_in_Mozilla). You can grab the [latest version of NodeJS](http://nodejs.org/dist/) (at least 0.11) and start hacking. Remember to run node with the `--harmony` flag to have support for generators.
