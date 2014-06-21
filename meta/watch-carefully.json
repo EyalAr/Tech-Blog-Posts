@@ -1,0 +1,16 @@
+{
+    "title": "$watch Carefully",
+    "date": {
+        "day": 22,
+        "month": 6,
+        "year": 2014
+    },
+    "categories": ["technical"],
+    "tags": ["angularjs", "watch", "performance"],
+    "file": "../posts/watch-carefully.markdown",
+    "slug": "watch-carefully",
+    "authors": [{
+        "name": "Eyal Arubas",
+        "email": "eyalarubas@gmail.com"
+    }]
+}
