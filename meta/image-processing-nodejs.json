@@ -1,0 +1,16 @@
+{
+    "title": "Image processing and manipulation in NodeJS",
+    "date": {
+        "day": 2,
+        "month": 7,
+        "year": 2014
+    },
+    "categories": ["technical"],
+    "tags": ["nodejs", "image", "processing", "native module", "C++"],
+    "file": "../posts/image-processing-nodejs.markdown",
+    "slug": "image-processing-nodejs",
+    "authors": [{
+        "name": "Eyal Arubas",
+        "email": "eyalarubas@gmail.com"
+    }]
+}
