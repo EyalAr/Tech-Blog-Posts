@@ -34,6 +34,7 @@
 				<div id="links">
 					<span class="link"><a href="http://about.eyalarubas.com">About & Contact</a></span>
 					<span class="link"><a href="https://www.goodreads.com/review/list/7034243-eyal">Reading List</a></span>
+					<span class="link"><a href="https://twitter.com/Eyal_Ar">Twitter</a></span>
 				</div>
 				<div id="post-entries">
 					{{#_global._contexts}}
