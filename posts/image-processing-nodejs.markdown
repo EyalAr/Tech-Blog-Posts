@@ -1,6 +1,6 @@
 I want to do simple image manipulations in NodeJS. All modules out there, which
 claim to provide image processing capabilities, wrap an external program which
-is actually manipulation the image. Usually in the form of spawning a child
+is actually manipulating the image. Usually in the form of spawning a child
 process and running a contrived external command in it. All these modules
 require this external program to be already installed on the system.
 
