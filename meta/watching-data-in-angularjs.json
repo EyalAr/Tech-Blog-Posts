@@ -1,14 +1,14 @@
 {
-    "title": "$watch Carefully",
+    "title": "Watching data in AngularJS",
     "date": {
-        "day": 22,
-        "month": 6,
+        "day": 25,
+        "month": 7,
         "year": 2014
     },
     "categories": ["technical"],
     "tags": ["angularjs", "watch", "performance"],
-    "file": "../posts/watch-carefully.markdown",
-    "slug": "watch-carefully",
+    "file": "../posts/watching-data-in-angularjs.markdown",
+    "slug": "watching-data-in-angularjs",
     "authors": [{
         "name": "Eyal Arubas",
         "email": "eyalarubas@gmail.com"
