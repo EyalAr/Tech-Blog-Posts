@@ -73,17 +73,22 @@ be aware to how it&#39;s done); as even the slowest methods are still fast enoug
 <p>When our data grows bigger, then we start to notice performance differences
 between different methods. This is especially true when we want to enable user
 interactions with the data, as is often the case with graphical data.</p>
-<p>We illustrate by example. Let&#39;s define a box:</p>
+<p>In this post I will show an example of a simple data-intensive application which
+can be implemented in several ways; each of which has a different performance.
+This will show how the structure of our data, the way we manipulate it and the
+way we watch for changes can greatly affect the performance of our application.</p>
+<p>We illustrate by example. Let&#39;s define our a basic type of datum, a box:</p>
 <pre><code class="lang-Javascript">var box = {
-    color: <span class="hljs-keyword">...</span>,
-    opened: true / false,
-    items: [ <span class="hljs-keyword">...</span> ]
+  color: <span class="hljs-keyword">...</span>,
+  opened: true / false,
+  items: [<span class="hljs-keyword">...</span>]
 };
 </code></pre>
 <p>A box has a color, it can be opened or closed, and it contains some unknown
-items.</p>
-<p>Now let&#39;s say we have 400 boxes which we want to display to our users:</p>
-<pre><code class="lang-Javascript"><span class="hljs-keyword">var</span> boxes = [ <span class="hljs-comment">/* an array of 400 boxes */</span> ];
+items (possible many items).</p>
+<p>Now let&#39;s say we have many (hundreds or thousands) boxes which we want to
+display to our users:</p>
+<pre><code class="lang-Javascript"><span class="hljs-keyword">var</span> boxes = [ <span class="hljs-comment">/* an array of many boxes */</span> ];
 </code></pre>
 <p>We also want to provide a control panel to open boxes by their color.</p>
 <p>In AngularJS we can implement this simple UI with two directives:</p>
@@ -95,29 +100,30 @@ be opened.</li>
 <p>We also have a simple parent controller for these two directives which enables
 the communication. It serves three purposes:</p>
 <ol>
-<li>Provides the <code>boxes</code> array to the first directive.</li>
-<li>Provide a list of colors to the second directive.</li>
-<li>Update the <code>boxes</code> array when the opened color changes.</li>
+<li>To provide the <code>boxes</code> array to the first directive.</li>
+<li>To provides a list of colors to the second directive.</li>
+<li>To open and close boxes as the opened color changes. Or, in other words, to
+update the boxes in the <code>boxes</code> array.</li>
 </ol>
-<pre><code class="lang-Javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">boxesCtrl</span><span class="hljs-params">(<span class="hljs-variable">$scope</span>)</span> {</span>
+<pre><code class="lang-Javascript"><span class="hljs-comment">// The parent controller:</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">boxesCtrl</span><span class="hljs-params">(<span class="hljs-variable">$scope</span>)</span> {</span>
 
-    <span class="hljs-comment">// get boxes from server</span>
-    <span class="hljs-variable">$scope</span>.boxes = [ <span class="hljs-comment">/* 400 boxes */</span> ];
+  <span class="hljs-comment">// get boxes from server</span>
+  <span class="hljs-variable">$scope</span>.boxes = [ <span class="hljs-comment">/* boxes */</span> ];
 
-    <span class="hljs-comment">// track which boxes are opened by color:</span>
-    <span class="hljs-variable">$scope</span>.colors = {
-        <span class="hljs-keyword">list</span>: [ <span class="hljs-comment">/* list of colors */</span> ],
-        opened: ...
-    }
-
-    <span class="hljs-variable">$scope</span>.<span class="hljs-variable">$watch</span>(<span class="hljs-string">'colors.opened'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(color)</span> {</span>
-        <span class="hljs-comment">// update $scope.boxes according to the</span>
-        <span class="hljs-comment">// currently opened color.</span>
-    });
+  <span class="hljs-comment">// track which boxes are opened by color:</span>
+  <span class="hljs-variable">$scope</span>.colors = {
+    <span class="hljs-keyword">list</span>: [ <span class="hljs-comment">/* list of colors */</span> ],
+    opened: ...
+  }
+  <span class="hljs-variable">$scope</span>.<span class="hljs-variable">$watch</span>(<span class="hljs-string">'colors.opened'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(color)</span> {</span>
+    <span class="hljs-comment">// update $scope.boxes according to the</span>
+    <span class="hljs-comment">// currently opened color.</span>
+  });
 
 }
 </code></pre>
-<p>The control panel directive is also straightforward, it should simple draw a
+<p>The control panel directive is also straightforward, it should simply draw a
 button to each of the colors, and enable to change the color of boxes to be
 opened. Almost all the functionality is in the directive&#39;s template:</p>
 <pre><code class="lang-HTML"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-attribute">span</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"color in colors.list"</span>
@@ -129,8 +135,89 @@ opened. Almost all the functionality is in the directive&#39;s template:</p>
 <p>This is how it looks (try to click the buttons):</p>
 <iframe src="http://eyalar.github.io/Angular--watch-comparison/cp-prev.html" style="height:60px;"></iframe>
 
-<iframe src="http://eyalar.github.io/Angular--watch-comparison/ng-repeat.html" style="height:500px;"></iframe>
+<p>The last thing we are missing is the directive to draw the boxes. We have a few
+options here. Basically we need to respond to changes in the <code>boxes</code> array and
+update the DOM accordingly.</p>
+<p>This actually depends on how we choose to update the boxes in the <code>boxes</code> array
+at our parent controller. Every time the user chooses a different color to be
+opened, we need to go through all the boxes and open / close them according to
+their color.</p>
+<p>The simplest way to do it would be to update the <code>opened</code> field of each box
+object:</p>
+<pre><code class="lang-Javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">boxesCtrl</span><span class="hljs-params">(<span class="hljs-variable">$scope</span>)</span> {</span>
+
+  <span class="hljs-comment">/* ... */</span>
+
+  <span class="hljs-variable">$scope</span>.<span class="hljs-variable">$watch</span>(<span class="hljs-string">'colors.opened'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(color)</span> {</span>
+    <span class="hljs-variable">$scope</span>.boxes.<span class="hljs-keyword">forEach</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(box)</span> {</span>
+      box.opened = box.color === color;
+    });
+  });
+
+}
+</code></pre>
+<p>Now we can build our boxes rendering directive:</p>
+<pre><code class="lang-Javascript"><span class="hljs-comment">// boxes rendering directive:</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bxBoxes</span><span class="hljs-params">()</span> {</span>
+  <span class="hljs-keyword">return</span> {
+    scope: {
+      boxes: <span class="hljs-string">'=bxBoxes'</span>
+    },
+    link: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(scope, rootEl, attrs)</span> {</span>
+      scope.boxEls = [];
+      scope.boxes.<span class="hljs-keyword">forEach</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(box)</span> {</span>
+        <span class="hljs-keyword">var</span> boxEl = <span class="hljs-comment">/* build a DOM element for each box */</span>;
+        scope.boxEls.push(boxEl);
+        rootEl.append(boxEl);
+      });
+
+      <span class="hljs-comment">// update the dom when boxes are changed:</span>
+      scope.<span class="hljs-variable">$watch</span>(<span class="hljs-string">'boxes'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(boxes)</span> {</span>
+        scope.boxEls.<span class="hljs-keyword">forEach</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(boxEl, i)</span> {</span>
+          <span class="hljs-keyword">if</span> (boxes[i].opened) boxEl.addClass(<span class="hljs-string">'opened'</span>);
+          <span class="hljs-keyword">else</span> boxEl.removeClass(<span class="hljs-string">'opened'</span>);
+        });
+      }, <span class="hljs-keyword">true</span>);
+    },
+  };
+};
+</code></pre>
+<p>The result:</p>
 <iframe src="http://eyalar.github.io/Angular--watch-comparison/deep-watch.html" style="height:500px;"></iframe>
+
+<p>The response time to a button click is terrible. On my machine I got close to
+350ms, which is unacceptable. Let&#39;s see why.</p>
+<p>Our boxes rendering directive is responsible for, well, rendering boxes. But it
+also needs to update rendered boxes when the underlying data changes. For this
+to happen, we must watch for changes in data. Our <code>$watch</code> statement does
+exactly that. Notice the <code>true</code> flag. Here we tell the <code>$watch</code> function to look
+at the contents of the <code>boxes</code> array and detect for changes with
+<strong>deep-equality</strong>. Without it the <code>$watch</code> statement would check for changes
+with shallow-equality. In other words, it would only check if the <strong>reference</strong>
+inside <code>scope.boxes</code> has changed. But since it&#39;s always the same array, no
+change would be detected, and the UI would not be updated.</p>
+<p>Doing dirty-checking with deep equality can be very expensive. We have to
+compare the full structure of each <code>box</code> object, including the contents of each
+of it&#39;s fields. But most of those checks are redundant in our case, since we
+only care about the <code>opened</code> field. Let&#39;s see how we can be more efficient.</p>
+<p>Since we only do basic HTML in this example, our directive can be as simple as
+one <code>ng-repeat</code> statement. <code>ng-repeat</code> doesn&#39;t care about the deep structure of
+our objects, but only about the two upper nested levels, which is exactly what
+we need in order to detect changes in the <code>opened</code> field of each of the boxes.
+Let&#39;s see it in action and then explain.</p>
+<p>This time we can avoid manual Javascript DOM manipulations and write the
+familiar <code>ng-repeat</code> markup:</p>
+<pre><code class="lang-HTML"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"box in boxes"</span>
+      <span class="hljs-attribute">class</span>=<span class="hljs-value">"box"</span>
+      <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: </span></span></span><span class="hljs-expression">{{<span class="hljs-variable">box.color</span>}}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">"</span>
+      <span class="hljs-attribute">ng-class</span>=<span class="hljs-value">"{'opened': box.opened}"</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span></span>
+</code></pre>
+<p>And the result:</p>
+<iframe src="http://eyalar.github.io/Angular--watch-comparison/ng-repeat.html" style="height:500px;"></iframe>
+
+<p>The response time is OK, but not great. On my machine I got about 80ms. We can
+do a lot better. Let&#39;s take a close look at what&#39;s going on.</p>
 <iframe src="http://eyalar.github.io/Angular--watch-comparison/shallow-watch.html" style="height:500px;"></iframe>
 <iframe src="http://eyalar.github.io/Angular--watch-comparison/watch-collection.html" style="height:500px;"></iframe>
 
