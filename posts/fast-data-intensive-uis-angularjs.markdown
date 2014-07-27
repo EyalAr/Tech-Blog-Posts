@@ -170,8 +170,8 @@ The result:
 <iframe src="http://eyalar.github.io/Angular--watch-comparison/deep-watch.html"
         style="height:500px;"></iframe>
 
-The response time to a button click is terrible. On my machine I got close to
-350ms, which is unacceptable. Let's see why.
+The response time to a button click is **terrible**. On my machine I got close
+to 350ms, which is unacceptable. Let's see why.
 
 Our boxes rendering directive is responsible for, well, rendering boxes. But it
 also needs to update rendered boxes when the underlying data changes. For this
@@ -201,12 +201,12 @@ two options:
    anyway, creating a new replacement array is not much overhead. With this
    option, checking if our data has changed is easy; we just check if this one
    `scope.boxes` array-reference has changed.
-0. Make sure that any time a box changes, only that specific box is replaced
+0. Make sure that every time a box changes, only that specific box is replaced
    inside the `scope.boxes` array. In other words, we replace a box object with
    an equivalent updated object, thus effectively changing this box's reference
    inside the boxes array. With this option, to detect changes in data it's not
    enough to check only one array-reference, but we need to check each of the
-   object references inside the array. Still, it's not nearly as expansive as
+   object references inside the array. Still, it's not nearly as expensive as
    deep-comparing each of those objects.
 
 Let's start with the first option. We change the relevant part in our parent
@@ -241,18 +241,16 @@ And the result:
 <iframe src="http://eyalar.github.io/Angular--watch-comparison/shallow-watch.html"
         style="height:500px;"></iframe>
 
-The response time is noticeably much better. On my machine I got around 5ms.
+The response time is noticeably much better. On my machine I got around 3ms.
 
-But this option comes with a (small) cost. Look at our parent controller again.
-In order to achieve shallow-watching in the directive, the controller must
-replace the entire `boxes` array with a new array. This requires storing in
-memory twice as many items (object references) as we actually need. Granted,
-even if he have thousands of objects, it's still a very small price to pay for
-being able to do dirty-checks with only one array-reference comparison.
+Let's Look at our parent controller again. In order to achieve shallow-watching
+in the directive, the controller must replace the entire `boxes` array with a
+new array.
 
-If you don't like this small cost, let's discuss the second option. We change
-the relevant part in our parent controller to keep the reference to the 'boxes'
-array, but change references to 'box' objects inside the array.
+Changing the array reference may not always be possible in every application.
+Let's discuss the second option. We change the relevant part in our parent
+controller to keep the reference to the 'boxes' array, but change references to
+'box' objects inside the array.
 
 ```Javascript
 function boxesCtrl($scope) {
@@ -271,7 +269,7 @@ function boxesCtrl($scope) {
 }
 ```
 
-Now in our directive, we need a way to detect when one of the box-object
+Now, in our directive, we need a way to detect when one of the box-object
 references changes. We can't use the `$watch` statement as before since it will
 only detect changes to the array-reference; which now always remains the same.
 Instead, we need to shallow-watch one level down. Angular provides us with the
@@ -291,3 +289,17 @@ The result:
 
 <iframe src="http://eyalar.github.io/Angular--watch-comparison/watch-collection.html"
         style="height:500px;"></iframe>
+
+And here as well the response time is excellent, and almost identical to the
+first option (again 3ms on my machine). Apparently the overhead of more
+shallow-comparisons is not significant.
+
+Let's conclude.
+
+Designing fast data-intensive UIs requires being aware of the structure of data,
+and how we respond to changes in data. When our data is large and complicated
+we can't afford any inefficiency. In this post we saw how easy it is to misuse
+familiar data-watching methods, and inadvertently causing the UI to be slow.
+By understanding how data is watched, we can construct it, and update it, in
+ways which will allow us to employ more efficient UI updates. Making the UI
+faster.

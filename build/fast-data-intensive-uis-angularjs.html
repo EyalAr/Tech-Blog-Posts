@@ -187,8 +187,8 @@ object:</p>
 <iframe src="http://eyalar.github.io/Angular--watch-comparison/deep-watch.html"
         style="height:500px;"></iframe>
 
-<p>The response time to a button click is terrible. On my machine I got close to
-350ms, which is unacceptable. Let&#39;s see why.</p>
+<p>The response time to a button click is <strong>terrible</strong>. On my machine I got close
+to 350ms, which is unacceptable. Let&#39;s see why.</p>
 <p>Our boxes rendering directive is responsible for, well, rendering boxes. But it
 also needs to update rendered boxes when the underlying data changes. For this
 to happen, we must watch for changes in data. Our <code>$watch</code> statement does
@@ -215,12 +215,12 @@ each time one of the boxes changes. Since we need to check each of the boxes
 anyway, creating a new replacement array is not much overhead. With this
 option, checking if our data has changed is easy; we just check if this one
 <code>scope.boxes</code> array-reference has changed.</li>
-<li>Make sure that any time a box changes, only that specific box is replaced
+<li>Make sure that every time a box changes, only that specific box is replaced
 inside the <code>scope.boxes</code> array. In other words, we replace a box object with
 an equivalent updated object, thus effectively changing this box&#39;s reference
 inside the boxes array. With this option, to detect changes in data it&#39;s not
 enough to check only one array-reference, but we need to check each of the
-object references inside the array. Still, it&#39;s not nearly as expansive as
+object references inside the array. Still, it&#39;s not nearly as expensive as
 deep-comparing each of those objects.</li>
 </ol>
 <p>Let&#39;s start with the first option. We change the relevant part in our parent
@@ -248,16 +248,14 @@ scope.<span class="hljs-variable">$watch</span>(<span class="hljs-string">'boxes
 <iframe src="http://eyalar.github.io/Angular--watch-comparison/shallow-watch.html"
         style="height:500px;"></iframe>
 
-<p>The response time is noticeably much better. On my machine I got around 5ms.</p>
-<p>But this option comes with a (small) cost. Look at our parent controller again.
-In order to achieve shallow-watching in the directive, the controller must
-replace the entire <code>boxes</code> array with a new array. This requires storing in
-memory twice as many items (object references) as we actually need. Granted,
-even if he have thousands of objects, it&#39;s still a very small price to pay for
-being able to do dirty-checks with only one array-reference comparison.</p>
-<p>If you don&#39;t like this small cost, let&#39;s discuss the second option. We change
-the relevant part in our parent controller to keep the reference to the &#39;boxes&#39;
-array, but change references to &#39;box&#39; objects inside the array.</p>
+<p>The response time is noticeably much better. On my machine I got around 3ms.</p>
+<p>Let&#39;s Look at our parent controller again. In order to achieve shallow-watching
+in the directive, the controller must replace the entire <code>boxes</code> array with a
+new array.</p>
+<p>Changing the array reference may not always be possible in every application.
+Let&#39;s discuss the second option. We change the relevant part in our parent
+controller to keep the reference to the &#39;boxes&#39; array, but change references to
+&#39;box&#39; objects inside the array.</p>
 <pre><code class="lang-Javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">boxesCtrl</span><span class="hljs-params">(<span class="hljs-variable">$scope</span>)</span> {</span>
   <span class="hljs-comment">/* ... */</span>
   <span class="hljs-variable">$scope</span>.<span class="hljs-variable">$watch</span>(<span class="hljs-string">'colors.opened'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(color)</span> {</span>
@@ -273,8 +271,34 @@ array, but change references to &#39;box&#39; objects inside the array.</p>
   });
 }
 </code></pre>
+<p>Now, in our directive, we need a way to detect when one of the box-object
+references changes. We can&#39;t use the <code>$watch</code> statement as before since it will
+only detect changes to the array-reference; which now always remains the same.
+Instead, we need to shallow-watch one level down. Angular provides us with the
+<code>$watchCollection</code> statement which does what we need. It watches with
+shallow-equality one level down inside a collection. If we have an array, it
+will shallow-compare the items in the array, and will not do any
+deep-comparisons if the items are objects.</p>
+<pre><code class="lang-Javascript"><span class="hljs-comment">// update the DOM when boxes are changed:</span>
+scope.<span class="hljs-variable">$watchCollection</span>(<span class="hljs-string">'boxes'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(boxes)</span> {</span>
+  <span class="hljs-comment">// DOM updates as before</span>
+});
+</code></pre>
+<p>The result:</p>
 <iframe src="http://eyalar.github.io/Angular--watch-comparison/watch-collection.html"
         style="height:500px;"></iframe>
+
+<p>And here as well the response time is excellent, and almost identical to the
+first option (again 3ms on my machine). Apparently the overhead of more
+shallow-comparisons is not significant.</p>
+<p>Let&#39;s conclude.</p>
+<p>Designing fast data-intensive UIs requires being aware of the structure of data,
+and how we respond to changes in data. When our data is large and complicated
+we can&#39;t afford any inefficiency. In this post we saw how easy it is to misuse
+familiar data-watching methods, and inadvertently causing the UI to be slow.
+By understanding how data is watched, we can construct it, and update it, in
+ways which will allow us to employ more efficient UI updates. Making the UI
+faster.</p>
 
 				</div>
 				<footer class="footer">
