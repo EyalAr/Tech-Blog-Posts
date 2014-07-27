@@ -1,5 +1,5 @@
 {
-    "title": "Watching data in AngularJS",
+    "title": "Fast Data-intensive UIs in AngularJS",
     "date": {
         "day": 25,
         "month": 7,
@@ -7,8 +7,8 @@
     },
     "categories": ["technical"],
     "tags": ["angularjs", "watch", "performance"],
-    "file": "../posts/watching-data-in-angularjs.markdown",
-    "slug": "watching-data-in-angularjs",
+    "file": "../posts/fast-data-intensive-uis-angularjs.markdown",
+    "slug": "fast-data-intensive-uis-angularjs",
     "authors": [{
         "name": "Eyal Arubas",
         "email": "eyalarubas@gmail.com"
