@@ -1,0 +1,16 @@
+{
+    "title": "Separating builds from source in a Git repo",
+    "date": {
+        "day": 15,
+        "month": 10,
+        "year": 2014
+    },
+    "categories": ["technical"],
+    "tags": ["git"],
+    "file": "../posts/separating-builds-from-source.markdown",
+    "slug": "separating-builds-from-source",
+    "authors": [{
+        "name": "Eyal Arubas",
+        "email": "eyalarubas@gmail.com"
+    }]
+}
