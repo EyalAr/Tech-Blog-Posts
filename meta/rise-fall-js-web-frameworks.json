@@ -1,0 +1,16 @@
+{
+    "title": "The Rise and Fall of JS Web Frameworks",
+    "date": {
+        "day": 8,
+        "month": 5,
+        "year": 2015
+    },
+    "categories": ["technical"],
+    "tags": ["algorithms", "academia"],
+    "file": "../posts/algorithms-book.markdown",
+    "slug": "algorithms-book",
+    "authors": [{
+        "name": "Eyal Arubas",
+        "email": "eyalarubas@gmail.com"
+    }]
+}
