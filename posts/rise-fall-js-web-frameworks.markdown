@@ -9,7 +9,7 @@ completely new and innovative.
 
 One of the base assumptions of frameworks is that we, developers, need
 structure to be enforced externally. In all frameworks there’s a right way to
-do things and all other ways are wrong. You’ll know when your way is wrong
+do things and all other ways are wrong. You will know when your way is wrong
 because the framework will fight you back into the right way. But what if it
 doesn’t suit your needs?
 
@@ -29,8 +29,18 @@ But we don't want "how". We need "what".
 JS web frameworks enforce structure by defining a certain way of developing
 applications. But this enforced way is not always the best for any type of
 application. Recently we have seen a move in the JS ecosystem towards smaller
-tools which do one thing. Developers today start to move away from a complete
-framework solution, towards picking the right tools for the job; essentially
-creating their own ad-hoc framework.
+tools which do one thing (*dotadiw*). Developers today start to move away from a
+complete framework solution, towards picking the right tools for the job;
+essentially creating their own ad-hoc framework.
 
-So what are the essential components of every web framework?
+So what are the essential components of every web framework? What do we need
+the framework to do? It's up to your specific application really. But since
+all frameworks are designed to support a broad range of applications, they
+will usually need to define:
+
+- What is the way by which modules are defined and loaded.
+- What are the possible types of components and what kind of functionality they
+  provide (controllers, models, factories, services, providers, widgets...).
+- What are the ways to manage UI rendering, business logic and user data.
+- How does data propagate from the server to the components.
+- How should the project be built.
