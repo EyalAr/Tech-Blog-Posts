@@ -15,9 +15,9 @@ do things and all other ways are wrong. You will know when your way is wrong
 because the framework will fight you back into the right way. But what if it
 doesn’t suit your needs or your style?
 
-There is no one-to-one correspondance between business logic and code structure.
+There is no one-to-one correspondence between business logic and code structure.
 There are many code designs which can achieve the same functionality. Some more
-elegent than others, some more efficient than others and some more maintainable
+elegant than others, some more efficient than others and some more maintainable
 than others. When limiting code design options we inhibit developers' ability to
 implement business logic.
 
@@ -29,7 +29,13 @@ needs and personal (or corporate) flavors.
 The intention of frameworks is good. Especially for relatively inexperienced
 developers. Frameworks solve some problem. My contention is that by
 understanding what frameworks try to solve (which is something every experienced
-developer should try to understand), their existance becomes redundant.
+developer should try to understand), their existence becomes redundant, and even
+detrimental. Detrimental because by solving several problems all at once, they
+obscure the border of where one problem starts and another ends. I.e. people
+think that UI data binding is an automatic process which makes the UI update
+whenever the data model changes (I'm looking at you Angular). But those are
+actually two separate problems: (1) Data-binding - having the UI reflect some
+data model, and (2) Data-observation - getting notified when data changes.
 
 All those "right ways" share a few things in common. They try to tell us how to
 write components, how to manage dependencies, how user interactions should be
