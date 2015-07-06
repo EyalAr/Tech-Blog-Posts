@@ -19,12 +19,6 @@ has several key points:
    historically, lack the education needed for such development of complex
    apps; which makes frameworks a necessity.
 
-Structure is good. When it’s a natural part of our design process it's even
-better. But it can be painful when our design is forced to fit a pre-determined
-structure. There are many types of web applications. Some of them have
-similarities and some of them are unique. Some share a similar structure and
-some are completely new and innovative.
-
 There is an abundance of people who can write some JS code. A subset of them is
 capable of writing a small single-page app. A subset of those can write a medium
 sized single-page app. And of those, only a few can work in a team which
@@ -32,6 +26,12 @@ produces a large single-page app. Frameworks make those subsets of people
 larger. But there's another subset - the subset of people who truly understand
 the problems needed to be solved in order to develop a web app. With frameworks,
 it's not really necessary to understand.
+
+Structure is good. When it’s a natural part of our design process it's even
+better. But it can be painful when our design is forced to fit a pre-determined
+structure. There are many types of web applications. Some of them have
+similarities and some of them are unique. Some share a similar structure and
+some are completely new and innovative.
 
 One of the base assumptions of frameworks is that we, developers, need
 structure to be enforced externally. In all frameworks there’s a right way to
@@ -53,7 +53,20 @@ needs and personal (or corporate) flavors.
 Recently we have seen a move in the JS ecosystem towards smaller tools which do
 one thing ([*dotadiw*][1]). Developers today start to move away from a complete
 framework solution, towards picking the right tools for the job; essentially
-creating their own ad-hoc framework.
+creating their own ad-hoc framework. This, I suspect, stems from several
+reasons:
+
+1. An awakening of JS as a language. A lot of attention has been given lately
+   into educating developers of best practices, JS programming patterns and
+   standardization. Framework-created domain specific languages are becoming
+   less useful.
+2. A better understanding of the JS community as a whole of the main problems
+   needed to be solved when developing apps. The community has educated itself
+   to define and isolate challenges; and, naturally, dotadiw-style solutions
+   have emerged.
+
+With an increased awareness of how to define and isolate problems, I believe
+frameworks can be detrimental.
 
 ## The Problem
 
