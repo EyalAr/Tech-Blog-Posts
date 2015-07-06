@@ -3,11 +3,35 @@
 Frameworks give us structure. Structure is essential for building large and
 scalable applications. We need structure to manage code, create flexible
 architecture, reuse functional components and enforce separation of concerns.
-Structure is good when it’s a natural part of our design process, but not when
-our design is forced to fit a pre-existing structure.  
-There are many types of web applications. Some of them have similarities and
-some of them are unique. Some share a similar structure and some are
-completely new and innovative.
+JS Frameworks are, partly, a result of a long stagnation in JS as a language
+and as an ecosystem. The historical background for the rise of JS frameworks
+has several key points:
+
+0. The role JS played as a small language which was used to do tasks such as
+   forms validation; and its quick rise in popularity (and lines of code),
+   largely due to introduction of ever more powerful browsers. This created a
+   big gap between the urgent need for new JS code and available tools. Quickly
+   new tools and frameworks started to pop up to close that gap.
+0. The rapid decline we are seeing in recent years in server-side rendering, and
+   the rapid incline in single-page apps. The paradigm of rich clients and lean
+   servers has been successful both because it reduces server-side costs and
+   complexity; and because it creates a better user experience. JS developers,
+   historically, lack the education needed for such development of complex
+   apps; which makes frameworks a necessity.
+
+Structure is good. When it’s a natural part of our design process it's even
+better. But it can be painful when our design is forced to fit a pre-determined
+structure. There are many types of web applications. Some of them have
+similarities and some of them are unique. Some share a similar structure and
+some are completely new and innovative.
+
+There is an abundance of people who can write some JS code. A subset of them is
+capable of writing a small single-page app. A subset of those can write a medium
+sized single-page app. And of those, only a few can work in a team which
+produces a large single-page app. Frameworks make those subsets of people
+larger. But there's another subset - the subset of people who truly understand
+the problems needed to be solved in order to develop a web app. With frameworks,
+it's not really necessary to understand.
 
 One of the base assumptions of frameworks is that we, developers, need
 structure to be enforced externally. In all frameworks there’s a right way to
