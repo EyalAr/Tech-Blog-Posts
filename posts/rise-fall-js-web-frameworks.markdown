@@ -1,5 +1,3 @@
-## Introduction
-
 Frameworks give us structure. Structure is essential for building large and
 scalable applications. We need structure to manage code, create flexible
 architecture, reuse functional components and enforce separation of concerns.
@@ -55,13 +53,13 @@ framework introduces its own right way of building web applications; and we,
 developers, need to be able to select among them the one that mostly suits our
 needs and personal (or corporate) flavors. Often, without knowing how the
 framework abstracts and solves the underlying problems. We learn the framework's
-language, framework paradigm and patterns and how to solve framework problems.
+language, framework paradigms and patterns and how to solve framework problems.
 
 Abstraction is good. Separation of concerns is great. But this kind of
 abstraction has a dangerous pitfall - it reduces understanding of whatever it
 abstracts and increases dependency in a specific solution. It's hard to
-atomically upgrade / replace a component when your single atomic component (the
-framework) encompases your entire app.
+atomically upgrade / replace a component when your smallest atomic component
+(the framework) encompases your entire app.
 
 Recently we have seen a move in the JS ecosystem towards smaller tools which do
 one thing ([*dotadiw*][1]). Developers today start to move away from a complete
@@ -73,36 +71,29 @@ reasons:
    into educating developers of best practices, JS programming patterns and
    standardization. Framework-created domain specific languages are becoming
    less useful.
+
 2. A better understanding of the JS community, as a whole, of the main problems
    needed to be solved when developing apps. The community has educated itself
    to define and isolate challenges; and, naturally, dotadiw-style solutions
    have emerged.
 
 With an increased awareness of how to define and isolate problems, I believe
-frameworks can be detrimental.
+frameworks can be detrimental. My contention is that by understanding what
+frameworks try to solve (which is something every experienced developer should
+try to understand), their existence becomes redundant, and even detrimental.
+Detrimental because by solving several problems all at once, they obscure the
+border of where one problem starts and another ends. I.e. people think that UI
+data binding is an automatic process which makes the UI update whenever the data
+model changes (I'm looking at you Angular). But those are actually two separate
+problems: (1) having the UI reflect some data model (data binding), and
+(2) getting notified when data changes (data observation).
 
-## The Problem
-
-The intention of frameworks is good. Especially for relatively inexperienced
-developers. Frameworks solve some problems. My contention is that by
-understanding what frameworks try to solve (which is something every experienced
-developer should try to understand), their existence becomes redundant, and even
-detrimental. Detrimental because by solving several problems all at once, they
-obscure the border of where one problem starts and another ends. I.e. people
-think that UI data binding is an automatic process which makes the UI update
-whenever the data model changes (I'm looking at you Angular). But those are
-actually two separate problems: (1) having the UI reflect some data model (data
-binding), and (2) getting notified when data changes (data observation).
-
-All those "right ways" share a few things in common. They try to tell us how to
-write components, how to manage dependencies, how user interactions should be
-modeled, how data synchronization with the server should be done, how
-application state should be represented, how the three aspects of UIs (layout,
-styles and logic) should be managed, etc.
-
-But we don't want "how". We need "what".
-
-## The Building Blocks
+All those "right ways" share a few things in common. They try to redefine the
+problems of web developement in their own terms; and tell us how to write
+components, how to manage dependencies, how user interactions should be modeled,
+how data synchronization with the server should be done, how application state
+should be represented, how the three aspects of UIs (layout, styles and logic)
+should be managed, etc.
 
 So what are the essential components of every web framework? What do we need
 the framework to do? It's up to your specific application really. But since
