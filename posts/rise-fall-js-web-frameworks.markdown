@@ -106,6 +106,7 @@ will usually need to define:
   provide (controllers, models, factories, services, providers, widgets, etc.).
 - How components communicate and share data (scopes, events, pub/sub, etc.).
 - What are the ways to manage UI rendering, business logic and data.
+- How do we link between routes and state.
 - How does data flow between the server and the components.
 - How should data be accessed.
 - How should the app be tested.
@@ -119,24 +120,32 @@ applications:
 - Data channels between different parts of the app.
 - Communication channels between different modules.
 - UI rendering, templating and data binding.
+- Routing.
 - Communication with a server (AJAX, Web Sockets, etc.).
 - Building and testing the application.
 
 Each of those points has a selection of tools available from the open source
 community, which solve this point exclusively. Mixing and matching those tools
 allow us to build our own ad-hoc framework. This way, the atomic dependencies
-of our app are smaller (and thus easier to replace or upgrade). There is also,
-in the long term, less to learn and re-learn. Learning about tools, and what
-they solve, creates a broader knowledge base which is more applicable for the
-future.
+of our app are smaller (and thus easier to replace or upgrade) and likely of
+better quality than their equivalent in some framework. There is also, in the
+long term, less to learn and re-learn. Learning about tools, and what they
+solve, creates a broader knowledge base which is more applicable for the future.
 
-Unlike the early days of web development, today's JS apps are much more rich and
-complex. Frameworks have helped us to manage and control this complexity. But
-they have also taken us away from the real problems we were trying to solve,
-obscured the borders between them, and created new problems in their own domain.
-Today the ecosystem is mature enough, and provides us with specific tools to
-specific problems. We, as developers need to know what it is we are trying to
-solve, and adapt the philosophy of composing specific solution to specific
-problems.
+By giving up monolithic frameworks in favor of composed ad-hoc ones, we are
+gaining all the advantages of managed and compatible apps, without disadvantages
+such as depending on a specific technology, difficulty in isolating problems and
+bugs, inability to use tools which are not compatible with the framework; but
+most importantly - we gain back the freedom in deciding our own design and
+architecture.
+
+In conclusion - unlike the early days of web development, today's JS apps are
+much richer and more complex. Frameworks have helped us to manage and control
+this complexity. But they have also taken us away from the real problems we were
+trying to solve, obscured the borders between them, and created new problems in
+their own domain. Today the ecosystem is mature enough, and provides us with
+specific tools to specific problems. We, as developers need to know what it is
+we are trying to solve, and adapt the philosophy of composing specific solution
+to specific problems.
 
 [1]: https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well "Do one thing and do it well"
