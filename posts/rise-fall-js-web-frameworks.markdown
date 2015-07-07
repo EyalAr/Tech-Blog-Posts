@@ -29,7 +29,7 @@ technical knowledge of the framework itself.
 There's another subset - the subset of people who truly understand the problems
 needed to be solved in order to develop a web app. Here, frameworks actually
 reduce the size of that subset. When using a framework, it's not as needed to
-understand the underlying probelms and structure, as it is without a framework.
+understand the underlying problems and structure, as it is without a framework.
 
 One of the base assumptions of frameworks is that we, developers, need structure
 to be enforced externally. Structure is good. When it’s a natural part of our
@@ -59,7 +59,7 @@ Abstraction is good. Separation of concerns is great. But this kind of
 abstraction has a dangerous pitfall - it reduces understanding of whatever it
 abstracts and increases dependency in a specific solution. It's hard to
 atomically upgrade / replace a component when your smallest atomic component
-(the framework) encompases your entire app.
+(the framework) encompasses your entire app.
 
 Recently we have seen a move in the JS ecosystem towards smaller tools which do
 one thing ([*dotadiw*][1]). Developers today start to move away from a complete
@@ -74,7 +74,7 @@ reasons:
 
 2. A better understanding of the JS community, as a whole, of the main problems
    needed to be solved when developing apps. The community has educated itself
-   to define and isolate challenges; and, naturally, dotadiw-style solutions
+   to define and isolate challenges; and, naturally, *dotadiw*-style solutions
    have emerged.
 
 With an increased awareness of how to define and isolate problems, I believe
@@ -89,33 +89,54 @@ problems: (1) having the UI reflect some data model (data binding), and
 (2) getting notified when data changes (data observation).
 
 All those "right ways" share a few things in common. They try to redefine the
-problems of web developement in their own terms; and tell us how to write
+problems of web development in their own terms; and tell us how to write
 components, how to manage dependencies, how user interactions should be modeled,
 how data synchronization with the server should be done, how application state
 should be represented, how the three aspects of UIs (layout, styles and logic)
 should be managed, etc.
 
-So what are the essential components of every web framework? What do we need
-the framework to do? It's up to your specific application really. But since
-all frameworks are designed to support a broad range of applications, they
+So what are the essential components of every web framework? What does the
+framework solve for us? It's up to your specific application really. But since
+most frameworks are designed to support a broad range of applications, they
 will usually need to define:
 
-- What is the way by which modules are defined and loaded.
-- What are the possible types of components and what kind of functionality they
-  provide (controllers, models, factories, services, providers, widgets...).
-- What are the ways to manage UI rendering, business logic and user data.
-- How does data propagate from the server to the components.
-- How should the project be tested.
-- How should the project be built.
+- What is the way by which modules are defined and loaded (from the markup,
+  programmatically, as a mix of markup and code, as separate files, etc).
+- What are the possible types of components and what kinds of functionality they
+  provide (controllers, models, factories, services, providers, widgets, etc.).
+- How components communicate and share data (scopes, events, pub/sub, etc.).
+- What are the ways to manage UI rendering, business logic and data.
+- How does data flow between the server and the components.
+- How should data be accessed.
+- How should the app be tested.
+- How should the app be built.
 
 This more or less corresponds to the requirements of most modern web
 applications:
 
 - Loading assets and dependencies.
 - Modularizing code in a maintainable way.
-- Enabling ways for modules to communicate and share data.
+- Data channels between different parts of the app.
+- Communication channels between different modules.
 - UI rendering, templating and data binding.
 - Communication with a server (AJAX, Web Sockets, etc.).
 - Building and testing the application.
+
+Each of those points has a selection of tools available from the open source
+community, which solve this point exclusively. Mixing and matching those tools
+allow us to build our own ad-hoc framework. This way, the atomic dependencies
+of our app are smaller (and thus easier to replace or upgrade). There is also,
+in the long term, less to learn and re-learn. Learning about tools, and what
+they solve, creates a broader knowledge base which is more applicable for the
+future.
+
+Unlike the early days of web development, today's JS apps are much more rich and
+complex. Frameworks have helped us to manage and control this complexity. But
+they have also taken us away from the real problems we were trying to solve,
+obscured the borders between them,and created new problems in their own domain.
+Today the ecosystem is mature enough, and provides us with specific tools to
+specific problems. We, as developers need to know what it us we are trying to
+solve, and adapt the philosophy of composing specific solution to specific
+problems.
 
 [1]: https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well "Do one thing and do it well"

@@ -1,14 +1,14 @@
 {
-    "title": "The Rise and Fall of JS Web Frameworks",
+    "title": "The Rise and Fall (Decline) of JS Web Frameworks",
     "date": {
-        "day": 8,
-        "month": 5,
+        "day": 7,
+        "month": 7,
         "year": 2015
     },
     "categories": ["technical"],
-    "tags": ["algorithms", "academia"],
-    "file": "../posts/algorithms-book.markdown",
-    "slug": "algorithms-book",
+    "tags": ["javascript", "frameworks"],
+    "file": "../posts/rise-fall-js-web-frameworks.markdown",
+    "slug": "rise-fall-js-frameworks",
     "authors": [{
         "name": "Eyal Arubas",
         "email": "eyalarubas@gmail.com"
