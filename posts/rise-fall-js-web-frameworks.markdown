@@ -16,7 +16,7 @@ has two key points:
    servers has been successful both because it reduces server-side costs and
    complexity; and because it creates a better user experience. JS developers,
    historically, lack the education needed for such development of complex
-   apps; which makes frameworks a necessity.
+   apps; which made frameworks a necessity.
 
 There is an abundance of people who can write some JS code. A subset of them is
 capable of writing a small single-page app. A subset of those can write a medium
@@ -70,7 +70,7 @@ reasons:
 1. An awakening of JS as a language. A lot of attention has been given lately
    into educating developers of best practices, JS programming patterns and
    standardization. Framework-created domain specific languages are becoming
-   less useful.
+   less useful and quickly obsolete.
 
 2. A better understanding of the JS community, as a whole, of the main problems
    needed to be solved when developing apps. The community has educated itself
@@ -86,7 +86,12 @@ border of where one problem starts and another ends. I.e. people think that UI
 data binding is an automatic process which makes the UI update whenever the data
 model changes (I'm looking at you Angular). But those are actually two separate
 problems: (1) having the UI reflect some data model (data binding), and
-(2) getting notified when data changes (data observation).
+(2) getting notified when data changes (data observation). A similar confusion
+exists for UI routing and URL updating, which often go hand in hand under the
+umbrella of "routing". But again, those are actually two separate things.
+Routing is simply the transition between application states in response to some
+instruction. Usually this instruction comes from the user (in which case we may
+want to update the URL), or from an external URL change.
 
 All those "right ways" share a few things in common. They try to redefine the
 problems of web development in their own terms; and tell us how to write
@@ -95,7 +100,7 @@ how data synchronization with the server should be done, how application state
 should be represented, how the three aspects of UIs (layout, styles and logic)
 should be managed, etc.
 
-So what are the essential components of every web framework? What does the
+So what are the essential components of every web framework? What does a
 framework solve for us? It's up to your specific application really. But since
 most frameworks are designed to support a broad range of applications, they
 will usually need to define:
@@ -104,9 +109,9 @@ will usually need to define:
   programmatically, as a mix of markup and code, as separate files, etc).
 - What are the possible types of components and what kinds of functionality they
   provide (controllers, models, factories, services, providers, widgets, etc.).
-- How components communicate and share data (scopes, events, pub/sub, etc.).
+- How components communicate and share data (scopes, events, pub/sub, API, etc.).
 - What are the ways to manage UI rendering, business logic and data.
-- How do we link between routes and state.
+- How do we link between routes, state and view.
 - How does data flow between the server and the components.
 - How should data be accessed.
 - How should the app be tested.
@@ -144,8 +149,8 @@ much richer and more complex. Frameworks have helped us to manage and control
 this complexity. But they have also taken us away from the real problems we were
 trying to solve, obscured the borders between them, and created new problems in
 their own domain. Today the ecosystem is mature enough, and provides us with
-specific tools to specific problems. We, as developers need to know what it is
-we are trying to solve, and adapt the philosophy of composing specific solution
+specific tools to specific problems. We, as developers, need to know what it is
+we are trying to solve, and adapt the philosophy of composing specific solutions
 to specific problems.
 
 [1]: https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well "Do one thing and do it well"
