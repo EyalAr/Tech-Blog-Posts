@@ -5,13 +5,14 @@ scalable applications. We need structure to manage code, create flexible
 architecture, reuse functional components and enforce separation of concerns.
 JS Frameworks are, partly, a result of a long stagnation in JS as a language
 and as an ecosystem. The historical background for the rise of JS frameworks
-has several key points:
+has two key points:
 
 0. The role JS played as a small language which was used to do tasks such as
-   forms validation; and its quick rise in popularity (and lines of code),
-   largely due to introduction of ever more powerful browsers. This created a
-   big gap between the urgent need for new JS code and available tools. Quickly
-   new tools and frameworks started to pop up to close that gap.
+   forms-validation and date-selection; and its quick rise in popularity,
+   largely due to introduction of more powerful browsers. This created a big gap
+   between the urgent need for new JS code and available tools. Quickly new
+   tools and frameworks started to pop up to close that gap.
+
 0. The rapid decline we are seeing in recent years in server-side rendering, and
    the rapid incline in single-page apps. The paradigm of rich clients and lean
    servers has been successful both because it reduces server-side costs and
@@ -21,23 +22,27 @@ has several key points:
 
 There is an abundance of people who can write some JS code. A subset of them is
 capable of writing a small single-page app. A subset of those can write a medium
-sized single-page app. And of those, only a few can work in a team which
-produces a large single-page app. Frameworks make those subsets of people
-larger. But there's another subset - the subset of people who truly understand
-the problems needed to be solved in order to develop a web app. With frameworks,
-it's not really necessary to understand.
+sized single-page app. And of those, even less can work in a team which produces
+a large single-page app. Frameworks make those subsets of people larger. They
+facilitate communication, encourage separation of concerns, and exchange the
+need to holistically understand all the integral parts of a web app, with
+technical knowledge of the framework itself.
 
-Structure is good. When it’s a natural part of our design process it's even
-better. But it can be painful when our design is forced to fit a pre-determined
-structure. There are many types of web applications. Some of them have
-similarities and some of them are unique. Some share a similar structure and
-some are completely new and innovative.
+There's another subset - the subset of people who truly understand the problems
+needed to be solved in order to develop a web app. Here, frameworks actually
+reduce the size of that subset. When using a framework, it's not as needed to
+understand the underlying probelms and structure, as it is without a framework.
 
-One of the base assumptions of frameworks is that we, developers, need
-structure to be enforced externally. In all frameworks there’s a right way to
-do things and all other ways are wrong. You will know when your way is wrong
-because the framework will fight you back into the right way. But what if it
-doesn’t suit your needs or your style?
+One of the base assumptions of frameworks is that we, developers, need structure
+to be enforced externally. Structure is good. When it’s a natural part of our
+design process it's even better. But it can be painful when our design is forced
+to fit a pre-determined structure. There are many types of web applications.
+Some of them have similarities and some of them are unique. Some share a similar
+structure and some are completely new and innovative.
+
+In all frameworks there’s a right way to do things and all other ways are wrong.
+You will know when your way is wrong because the framework will fight you back
+into the right way. But what if it doesn’t suit your needs or your style?
 
 There is no one-to-one correspondence between business logic and code structure.
 There are many code designs which can achieve the same functionality. Some more
@@ -48,7 +53,15 @@ implement business logic.
 The recent proliferation of frameworks makes things more difficult. Each
 framework introduces its own right way of building web applications; and we,
 developers, need to be able to select among them the one that mostly suits our
-needs and personal (or corporate) flavors.
+needs and personal (or corporate) flavors. Often, without knowing how the
+framework abstracts and solves the underlying problems. We learn the framework's
+language, framework paradigm and patterns and how to solve framework problems.
+
+Abstraction is good. Separation of concerns is great. But this kind of
+abstraction has a dangerous pitfall - it reduces understanding of whatever it
+abstracts and increases dependency in a specific solution. It's hard to
+atomically upgrade / replace a component when your single atomic component (the
+framework) encompases your entire app.
 
 Recently we have seen a move in the JS ecosystem towards smaller tools which do
 one thing ([*dotadiw*][1]). Developers today start to move away from a complete
@@ -60,7 +73,7 @@ reasons:
    into educating developers of best practices, JS programming patterns and
    standardization. Framework-created domain specific languages are becoming
    less useful.
-2. A better understanding of the JS community as a whole of the main problems
+2. A better understanding of the JS community, as a whole, of the main problems
    needed to be solved when developing apps. The community has educated itself
    to define and isolate challenges; and, naturally, dotadiw-style solutions
    have emerged.
