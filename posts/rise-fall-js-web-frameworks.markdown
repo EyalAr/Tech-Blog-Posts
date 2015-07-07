@@ -133,9 +133,9 @@ future.
 Unlike the early days of web development, today's JS apps are much more rich and
 complex. Frameworks have helped us to manage and control this complexity. But
 they have also taken us away from the real problems we were trying to solve,
-obscured the borders between them,and created new problems in their own domain.
+obscured the borders between them, and created new problems in their own domain.
 Today the ecosystem is mature enough, and provides us with specific tools to
-specific problems. We, as developers need to know what it us we are trying to
+specific problems. We, as developers need to know what it is we are trying to
 solve, and adapt the philosophy of composing specific solution to specific
 problems.
 
