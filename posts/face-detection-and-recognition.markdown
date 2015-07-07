@@ -349,7 +349,7 @@ more angles and positions.
 [7]:https://gist.github.com/EyalAr/5196200
 [8]:http://en.wikipedia.org/wiki/Local_binary_patterns
 [9]:http://www.mathworks.com/matlabcentral/fileexchange/36484-local-binary-patterns
-[10]:https://bitbucket.org/EyalAr/person-recognizer
+[10]:https://github.com/EyalAr/Person-Recognizer
 [11]:https://netbeans.org/
 [12]:http://docs.opencv.org/modules/objdetect/doc/cascade_classification.html
 [13]:http://docs.opencv.org/trunk/modules/contrib/doc/facerec/facerec_api.html
