@@ -46,7 +46,7 @@
 				</div>
 				{{/authors}}
 				<hr>
-				<div>
+				<div class="post-content">
 					{{{_content}}}
 				</div>
 				<footer class="footer">

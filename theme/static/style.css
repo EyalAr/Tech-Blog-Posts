@@ -20,6 +20,11 @@ iframe{
     font-weight: bold;
 }
 
+.post-content{
+    font-size: 1.2em;
+    line-height: 1.7em;
+}
+
 #links{
     padding: 10px 0;
     margin: 5px 0;
