@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Eyal Arubas">
+
+	<title>The Rise and Fall of JS Web Frameworks - Eyal&#39;s Technical Blog</title>
+
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="highlight.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-34851130-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8">
+				<div id="links">
+					<span class="link"><a href="index.html">Index</a></span>
+					<span class="link"><a href="http://about.eyalarubas.com">About & Contact</a></span>
+					<span class="link"><a href="https://www.goodreads.com/review/list/7034243-eyal">Reading List</a></span>
+					<span class="link"><a href="https://twitter.com/Eyal_Ar">Twitter</a></span>
+				</div>
+				<h1>The Rise and Fall of JS Web Frameworks</h1>
+				<div>
+					Tuesday, 7 July 2015
+				</div>
+				<div>
+					Eyal Arubas
+				</div>
+				<hr>
+				<div>
+					<p>Frameworks give us structure. Structure is essential for building large and
+scalable applications. We need structure to manage code, create flexible
+architecture, reuse functional components and enforce separation of concerns.
+JS Frameworks are, partly, a result of a long stagnation in JS as a language
+and as an ecosystem. The historical background for the rise of JS frameworks
+has two key points:</p>
+<ol>
+<li><p>The role JS played as a small language which was used to do tasks such as
+forms-validation and date-selection; and its quick rise in popularity,
+largely due to introduction of more powerful browsers. This created a big gap
+between the urgent need for new JS code and available tools. Quickly new
+tools and frameworks started to pop up to close that gap.</p>
+</li>
+<li><p>The rapid decline we are seeing in recent years in server-side rendering, and
+the rapid incline in single-page apps. The paradigm of rich clients and lean
+servers has been successful both because it reduces server-side costs and
+complexity; and because it creates a better user experience. JS developers,
+historically, lack the education needed for such development of complex
+apps; which made frameworks a necessity.</p>
+</li>
+</ol>
+<p>There is an abundance of people who can write some JS code. A subset of them is
+capable of writing a small single-page app. A subset of those can write a medium
+sized single-page app. And of those, even less can work in a team which produces
+a large single-page app. Frameworks make those subsets of people larger. They
+facilitate communication, encourage separation of concerns, and exchange the
+need to holistically understand all the integral parts of a web app, with
+technical knowledge of the framework itself.</p>
+<p>There&#39;s another subset - the subset of people who truly understand the problems
+needed to be solved in order to develop a web app. Here, frameworks actually
+reduce the size of that subset. When using a framework, it&#39;s not as needed to
+understand the underlying problems and structure, as it is without a framework.</p>
+<p>One of the base assumptions of frameworks is that we, developers, need structure
+to be enforced externally. Structure is good. When it’s a natural part of our
+design process it&#39;s even better. But it can be painful when our design is forced
+to fit a pre-determined structure. There are many types of web applications.
+Some of them have similarities and some of them are unique. Some share a similar
+structure and some are completely new and innovative.</p>
+<p>In all frameworks there’s a right way to do things and all other ways are wrong.
+You will know when your way is wrong because the framework will fight you back
+into the right way. But what if it doesn’t suit your needs or your style?</p>
+<p>There is no one-to-one correspondence between business logic and code structure.
+There are many code designs which can achieve the same functionality. Some more
+elegant than others, some more efficient than others and some more maintainable
+than others. When limiting code design options we inhibit developers&#39; ability to
+implement business logic.</p>
+<p>The recent proliferation of frameworks makes things more difficult. Each
+framework introduces its own right way of building web applications; and we,
+developers, need to be able to select among them the one that mostly suits our
+needs and personal (or corporate) flavors. Often, without knowing how the
+framework abstracts and solves the underlying problems. We learn the framework&#39;s
+language, framework paradigms and patterns and how to solve framework problems.</p>
+<p>Abstraction is good. Separation of concerns is great. But this kind of
+abstraction has a dangerous pitfall - it reduces understanding of whatever it
+abstracts and increases dependency in a specific solution. It&#39;s hard to
+atomically upgrade / replace a component when your smallest atomic component
+(the framework) encompasses your entire app.</p>
+<p>Recently we have seen a move in the JS ecosystem towards smaller tools which do
+one thing (<a href="https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well" title="Do one thing and do it well"><em>dotadiw</em></a>). Developers today start to move away from a complete
+framework solution, towards picking the right tools for the job; essentially
+creating their own ad-hoc framework. This, I suspect, stems from several
+reasons:</p>
+<ol>
+<li><p>An awakening of JS as a language. A lot of attention has been given lately
+into educating developers of best practices, JS programming patterns and
+standardization. Framework-created domain specific languages are becoming
+less useful and quickly obsolete.</p>
+</li>
+<li><p>A better understanding of the JS community, as a whole, of the main problems
+needed to be solved when developing apps. The community has educated itself
+to define and isolate challenges; and, naturally, <em>dotadiw</em>-style solutions
+have emerged.</p>
+</li>
+</ol>
+<p>With an increased awareness of how to define and isolate problems, I believe
+frameworks can be detrimental. My contention is that by understanding what
+frameworks try to solve (which is something every experienced developer should
+try to understand), their existence becomes redundant, and even detrimental.
+Detrimental because by solving several problems all at once, they obscure the
+border of where one problem starts and another ends. I.e. people think that UI
+data binding is an automatic process which makes the UI update whenever the data
+model changes (I&#39;m looking at you Angular). But those are actually two separate
+problems: (1) having the UI reflect some data model (data binding), and
+(2) getting notified when data changes (data observation). A similar confusion
+exists for UI routing and URL updating, which often go hand in hand under the
+umbrella of &quot;routing&quot;. But again, those are actually two separate things.
+Routing is simply the transition between application states in response to some
+instruction. Usually this instruction comes from the user (in which case we may
+want to update the URL), or from an external URL change.</p>
+<p>All those &quot;right ways&quot; share a few things in common. They try to redefine the
+problems of web development in their own terms; and tell us how to write
+components, how to manage dependencies, how user interactions should be modeled,
+how data synchronization with the server should be done, how application state
+should be represented, how the three aspects of UIs (layout, styles and logic)
+should be managed, etc.</p>
+<p>So what are the essential components of every web framework? What does a
+framework solve for us? It&#39;s up to your specific application really. But since
+most frameworks are designed to support a broad range of applications, they
+will usually need to define:</p>
+<ul>
+<li>What is the way by which modules are defined and loaded (from the markup,
+programmatically, as a mix of markup and code, as separate files, etc).</li>
+<li>What are the possible types of components and what kinds of functionality they
+provide (controllers, models, factories, services, providers, widgets, etc.).</li>
+<li>How components communicate and share data (scopes, events, pub/sub, API, etc.).</li>
+<li>What are the ways to manage UI rendering, business logic and data.</li>
+<li>How do we link between routes, state and view.</li>
+<li>How does data flow between the server and the components.</li>
+<li>How should data be accessed.</li>
+<li>How should the app be tested.</li>
+<li>How should the app be built.</li>
+</ul>
+<p>This more or less corresponds to the requirements of most modern web
+applications:</p>
+<ul>
+<li>Loading assets and dependencies.</li>
+<li>Modularizing code in a maintainable way.</li>
+<li>Data channels between different parts of the app.</li>
+<li>Communication channels between different modules.</li>
+<li>UI rendering, templating and data binding.</li>
+<li>Routing.</li>
+<li>Communication with a server (AJAX, Web Sockets, etc.).</li>
+<li>Building and testing the application.</li>
+</ul>
+<p>Each of those points has a selection of tools available from the open source
+community, which solve this point exclusively. Mixing and matching those tools
+allow us to build our own ad-hoc framework. This way, the atomic dependencies
+of our app are smaller (and thus easier to replace or upgrade) and likely of
+better quality than their equivalent in some framework. There is also, in the
+long term, less to learn and re-learn. Learning about tools, and what they
+solve, creates a broader knowledge base which is more applicable for the future.</p>
+<p>By giving up monolithic frameworks in favor of composed ad-hoc ones, we are
+gaining all the advantages of managed and compatible apps, without disadvantages
+such as depending on a specific technology, difficulty in isolating problems and
+bugs, inability to use tools which are not compatible with the framework; but
+most importantly - we gain back the freedom in deciding our own design and
+architecture.</p>
+<p>In conclusion - unlike the early days of web development, today&#39;s JS apps are
+much richer and more complex. Frameworks have helped us to manage and control
+this complexity. But they have also taken us away from the real problems we were
+trying to solve, obscured the borders between them, and created new problems in
+their own domain. Today the ecosystem is mature enough, and provides us with
+specific tools to specific problems. We, as developers, need to know what it is
+we are trying to solve, and adapt the philosophy of composing specific solutions
+to specific problems.</p>
+
+				</div>
+				<footer class="footer">
+					Generated from <a href="https://raw.githubusercontent.com/EyalAr/Tech-Blog-Posts/master/posts/rise-fall-js-frameworks.markdown">Markdown source</a> using <a href="https://github.com/EyalAr/Contrive">Contrive</a>.
+				</div>
+			</div>
+			<div class="col-sm-2"></div>
+		</div>
+	</div>
+</body>
+</html>
