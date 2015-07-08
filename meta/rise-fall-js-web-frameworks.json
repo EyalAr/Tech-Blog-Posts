@@ -8,7 +8,7 @@
     "categories": ["technical"],
     "tags": ["javascript", "frameworks"],
     "file": "../posts/rise-fall-js-web-frameworks.markdown",
-    "slug": "rise-fall-js-frameworks",
+    "slug": "rise-fall-js-web-frameworks",
     "authors": [{
         "name": "Eyal Arubas",
         "email": "eyalarubas@gmail.com"
